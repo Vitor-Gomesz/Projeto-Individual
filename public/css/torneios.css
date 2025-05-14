@@ -1,0 +1,142 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fonte base e fundo escuro */
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: #121212;
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111;
+  padding: 15px 50px;
+  border-bottom: 2px solid #00b8f4;
+}
+
+header .logo img {
+  height: 80px;
+  width: auto;
+}
+
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  transition: color 0.4s;
+}
+
+nav a:hover {
+  color: #FFCC00;
+}
+
+
+#campeonatos {
+  padding: 80px 40px;
+  text-align: center;
+}
+
+#campeonatos h2 {
+  font-size: 36px;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+#campeonatos h2::after {
+  content: "";
+  display: block;
+  width: 200px;
+  height: 4px;
+  background-color: #00b8f4;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.campeonato-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+
+.campeonato-item {
+  width: 320px;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  text-align: left;
+}
+
+.campeonato-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 184, 244, 0.4);
+}
+
+
+.campeonato-item h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #FFCC00;
+  font-family: 'Orbitron', sans-serif;
+}
+
+
+.campeonato-item img {
+  width: 100%;
+  height: 100x;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+
+.campeonato-item p {
+  font-size: 16px;
+  color: #ccc;
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+
+.campeonato-item a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #00b8f4;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.campeonato-item a:hover {
+  color: #FFCC00;
+}
+
+footer {
+  margin-top: 60px;
+  padding: 20px;
+  text-align: center;
+  background-color: #111;
+  border-top: 2px solid #00b8f4;
+  color: #888;
+  font-size: 14px;
+}

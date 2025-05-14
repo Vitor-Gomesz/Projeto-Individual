@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Six Frontier | Cadastro</title>
+
+  <script src="./js/sessao.js"></script>
+  <link rel="stylesheet" href="./css/cadastro.css">
+  <link rel="stylesheet" href="./css/estilo.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/icon/Logo-Principal-R6.png" />
+
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+          <a href="index.html"><img src="./assets/icon/Logo-Principal-R6.png"Six Frontier Logo"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="#torneios">Torneios</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li>|</li>
+                <li><a href="./login.html">Login</a></li>
+                <li><a href="/HTML/cadastro.html">Cadastrar</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="form-container">
+        <h1>Cadastro de Jogador</h1>
+        <form action="#">
+          
+            <label for="input_gamertag">Gamertag</label>  
+            <input type="text" id="input_gamertag" name="gamertag" required>
+            
+            <label for="input_email">E-mail</label>
+            <input type="email" id="input_email" name="email" required>
+            
+            <label for="input_senha">Senha</label>
+            <input type="password" id="input_senha" name="senha" required>
+
+            <label for="input_confirmar_senha">Confirmar Senha</label>
+            <input type="password" id="input_confirmar_senha" name="confirmar_senha" required placeholder="Confirme sua Senha">
+            
+            <button onclick="cadastrar()">Cadastrar</button>
+        </form>
+        <p>Já tem uma conta? <a href="./login.html">Faça login</a></p>
+    </div>
+</body>
+</html>
+
+<script>
+
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+  let listaEmpresasCadastradas = [];
+
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = input_gamertag.value;
+    var emailVar = input_email.value;
+    var senhaVar = input_senha.value;
+    var confirmacaoSenhaVar = input_confirmar_senha.value;
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == "" 
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+        idEmpresaVincular = listaEmpresasCadastradas[i].id
+        console.log("Código de ativação válido.");
+        break;
+      } else {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+        finalizarAguardar();
+      }
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // Listando empresas cadastradas 
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+
+            console.log("listaEmpresasCadastradas")
+            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+</script>

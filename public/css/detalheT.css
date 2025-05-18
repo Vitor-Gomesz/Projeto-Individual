@@ -1,0 +1,70 @@
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: #0f0f0f;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #1e1e1e;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo img {
+  height: 50px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.torneio-box {
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  padding: 30px;
+  width: 400px;
+  box-shadow: 0 0 10px #000;
+  text-align: center;
+}
+
+.torneio-box h1 {
+  color: #f0c420;
+}
+
+.torneio-box p {
+  margin: 10px 0;
+}
+
+.torneio-box button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #f0c420;
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.torneio-box button:hover {
+  background-color: #d4ac0d;
+}

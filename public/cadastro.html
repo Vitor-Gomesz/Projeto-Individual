@@ -23,8 +23,8 @@
         </div>
         <nav>
             <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="#torneios">Torneios</a></li>
+                <li><a href="./index.html">Inicio</a></li>
+                <li><a href="./torneios.html">Torneios</a></li>
                 <li><a href="#dashboard">Dashboard</a></li>
                 <li>|</li>
                 <li><a href="./login.html">Login</a></li>
@@ -38,21 +38,25 @@
         <form action="#">
           
             <label for="input_gamertag">Gamertag</label>  
-            <input type="text" id="input_gamertag" name="gamertag" required>
+            <input type="text" id="input_gamertag" name="gamertag" maxlength="13">
             
             <label for="input_email">E-mail</label>
-            <input type="email" id="input_email" name="email" required>
+            <input type="email" id="input_email" name="email" >
             
             <label for="input_senha">Senha</label>
-            <input type="password" id="input_senha" name="senha" required>
+            <input type="password" id="input_senha" name="senha" maxlength="40">
 
             <label for="input_confirmar_senha">Confirmar Senha</label>
-            <input type="password" id="input_confirmar_senha" name="confirmar_senha" required placeholder="Confirme sua Senha">
+            <input type="password" id="input_confirmar_senha" name="confirmar_senha" maxlength="40" placeholder="Confirme sua Senha">
             
-            <button onclick="cadastrar()">Cadastrar</button>
+            <button type="button" onclick="cadastrar()">Cadastrar</button>
         </form>
         <p>Já tem uma conta? <a href="./login.html">Faça login</a></p>
     </div>
+
+    <div id="cardErro" style="display: none; color: red; margin-top: 10px;">
+   <span id="mensagem_erro"></span>
+</div>
 </body>
 </html>
 
@@ -84,22 +88,11 @@
 
       finalizarAguardar();
       return false;
-    } else {
+      
+    }  else {
       setInterval(sumirMensagem, 5000);
     }
 
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-        idEmpresaVincular = listaEmpresasCadastradas[i].id
-        console.log("Código de ativação válido.");
-        break;
-      } else {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-        finalizarAguardar();
-      }
-    }
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -130,7 +123,7 @@
 
           limparFormulario();
           finalizarAguardar();
-        } else {
+        } else  {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
@@ -140,29 +133,31 @@
       });
 
     return false;
+
+
   }
 
   // Listando empresas cadastradas 
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
+  // function listar() {
+  //   fetch("/empresas/listar", {
+  //     method: "GET",
+  //   })
+  //     .then(function (resposta) {
+  //       resposta.json().then((empresas) => {
+  //         empresas.forEach((empresa) => {
+  //           listaEmpresasCadastradas.push(empresa);
 
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
+  //           console.log("listaEmpresasCadastradas")
+  //           console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+  //         });
+  //       });
+  //     })
+  //     .catch(function (resposta) {
+  //       console.log(`#ERRO: ${resposta}`);
+  //     });
+  // }
 
   function sumirMensagem() {
     cardErro.style.display = "none";
-  }
+  } 
 </script>

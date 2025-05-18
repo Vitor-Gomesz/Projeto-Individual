@@ -37,16 +37,19 @@
     <div class="form-container">
         <h1>LoginSix Frontier</h1>
         <form action="#">
-            <label for="input_email">E-mail</label>
-            <input type="email" id="input_email" name="email" required>
+            <label for="email_input">E-mail</label>
+            <input type="email" id="email_input" name="email" required>
             
-            <label for="input_senha">Senha</label>
-            <input type="password" id="input_senha" name="senha" required>
+            <label for="senha_input">Senha</label>
+            <input type="password" id="senha_input" name="senha" required>
             
-            <button onclick="entrar()">Entrar</button>
+            <button type="button" onclick="entrar()">Entrar</button>
         </form>
         <p>Não tem uma conta? <a href="./cadastro.html">Realize o seu cadastro!</a></p>
     </div>
+    <div id="cardErro" style="display: none; color: red; margin-top: 10px;">
+    <span id="mensagem_erro"></span>
+</div>
 </body>
 
 </html>
@@ -93,11 +96,11 @@
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    // sessionStorage.ID_USUARIO = json.id;
+                    // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                        window.location = "torneios.html";
                     }, 1000); // apenas para exibir o loading
 
                 });

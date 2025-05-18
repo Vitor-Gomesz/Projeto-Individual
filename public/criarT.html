@@ -1,56 +1,191 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Criar Torneio - Six Frontier</title>
+  <link rel="stylesheet" href="../public/css/criarT.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-        <header>
-        <div class="logo">
-          <a href="index.html"><img src="./assets/icon/Logo-Principal-R6.png"Six Frontier Logo></a>
-          <link rel="stylesheet" href="./css/criarT.css">
-
-        </div>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="#torneios">Torneios</a></li>
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li>|</li>
-                <li><a href="./login.html">Login</a></li>
-                <li><a href="/HTML/cadastro.html">Cadastrar</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <div class="form-container">
-        <h1>Criar Torneio</h1>
-        <form action="#">
-          
-            <label for="input_nomeT">Nome do Torneio</label>  
-            <input type="text" id="input_nomeT" name="NomeTorneio" required>
-            
-            <label for="input_email">Jogo</label>
-            <select name="Jogo" id="r6">
-                <option value="1">Rainbow Six Siege</option>
-            </select>
-
-            <input type='checkbox' name='q1_myOptions[]' id="input_1_0"/>
-            <label for="input_1_0"></label> 
-            <input type='checkbox' name='q1_myOptions[]' id="input_1_1"/>
-            <label for="input_1_1"></label> 
-
-
-            <label for="input_senha">Senha</label>
-            <input type="password" id="input_senha" name="senha" required>
-
-            <label for="input_confirmar_senha">Confirmar Senha</label>
-            <input type="password" id="input_confirmar_senha" name="confirmar_senha" required placeholder="Confirme sua Senha">
-            
-            <button onclick="criar()">Criar Torneio</button>
-        </form>
-        <p>Já tem uma conta? <a href="./login.html">Faça login</a></p>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="./assets/icon/Logo-Principal-R6.png" alt="Six Frontier Logo">
+      </a>
     </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Início</a></li>
+        <li><a href="#torneios">Torneios</a></li>
+        <li>|</li>
+        <li><a href="#">Voce</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="form-container">
+    <h1>Criar Torneio</h1>
+
+    <form action="#">
+      <label for="input_nomeT">Nome do Torneio</label>  
+      <input type="text" id="input_nomeT" >
+
+      <label for="input_jogo">Jogo</label>
+      <select name="Jogo" id="input_jogo" >
+        <option value="r6">Rainbow Six Siege</option>
+      </select>
+
+      <label>Plataformas</label>
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <input type="checkbox" id="input_pc" value="pc" />
+          <label for="input_pc">
+            <img src="./assets/icon/Icone PC.png.png" alt="PC" />
+          </label>
+        </div>
+
+        <div class="checkbox-item">
+          <input type="checkbox" id="input_xboxOne" value="XBOX_ONE" />
+          <label for="input_xboxOne">
+            <img src="./assets/icon/logo-xbox-one.png" alt="XBOX ONE" />
+          </label>
+        </div>
+
+        <div class="checkbox-item">
+          <input type="checkbox" id="input_xboxSeries" value="XBOX_SERIES" />
+          <label for="input_xboxSeries">
+            <img src="./assets/icon/Xbox Seres Icone.png" alt="XBOX SERIES" />
+          </label>
+        </div>
+
+        <div class="checkbox-item">
+          <input type="checkbox" id="input_ps4" value="PS4" />
+          <label for="input_ps4">
+            <img src="./assets/icon/Icone-PS4.png" alt="PS4" />
+          </label>
+        </div>
+
+        <div class="checkbox-item">
+          <input type="checkbox" id="input_ps5" value="PS5" />
+          <label for="input_ps5">
+            <img src="./assets/icon/Icone-PS5.png" alt="PS5" />
+          </label>
+        </div>
+      </div>
+      <div>
+        <label>Formato dos Campeonatos</label>
+        <div class="checkbox-item">
+          <input type="checkbox" id="input_tdm" value="TDM" />
+          <label for="input_tdm">
+            <img src="./assets/icon/TDM.png" alt="tdm" />
+          </label>
+        </div>
+
+        <div class="checkbox-item">
+          <input type="checkbox" id="input_normal" value="normal" />
+          <label for="input_normal">
+            <img src="./assets/icon/5v5.png" alt="5v5" />
+          </label>
+        </div>
+        
+          <div class="checkbox-item">
+          <input type="checkbox" id="input_contraTodos" value="contraTodos" />
+          <label for="input_contraTodos">
+            <img src="./assets/icon/Free for all.png" alt="tdm" />
+          </label>
+        </div>
+      </div>
+
+<div class="campo-checkbox">
+  <label>Resultado das Partidas</label>
+
+  <div class="selecao-Unica">
+    <input type="radio" id="input_adm" value="adm" />
+    <label for="input_adm">Administrador</label>
+    <p class="descricao">
+      A postagem dos resultados das partidas é uma tarefa exclusiva do administrador.
+    </p>
+  </div>
+
+  <div class="selecao-Unica">
+    <input type="radio" id="input_participante" value="participante" />
+    <label for="participante">Participantes</label>
+    <p class="descricao">
+      Além do administrador, os participantes envolvidos nas partidas têm permissão para realizar a postagem dos seus jogos.
+    </p>
+  </div>
+</div>
+
+
+<div class="campo-checkbox">
+  <label>Inscrições</label>
+
+  <div class="selecao-Unica">
+    <input type="radio" name="input_inscricao" id="publico" value="publico" />
+    <label for="publico"><strong>Pública</strong></label>
+    <p class="descricao">
+      Qualquer usuário pode se inscrever, mas a aprovação do administrador é necessária.
+    </p>
+  </div>
+
+  <div class="selecao-Unica">
+    <input type="radio" name="input_inscricao" id="privado" value="privado" />
+    <label for="privado">Privada</label>
+    <p class="descricao">
+      Somente o administrador está autorizado a fazer as inscrições.
+    </p>
+  </div>
+</div>
+
+      <button type="button" onclick="criarT()">Criar Torneio</button>
+    </form>
+  </div>
 </body>
 </html>
+
+<script>
+  function criarT(){
+
+    var nomeT = input_nomeT.value;
+    var nomeJ = input_jogo.value;
+    var pc = input_pc.value;
+    var xboxone = input_xboxOne.value;
+    var xboxseres = input_xboxSeries.value;
+    var ps5 = input_ps5.value;
+    var ps4 = input_ps4.value;
+
+     var plataformas = [];
+  if (document.getElementById('input_pc').checked) plataformas.push('PC');
+  if (document.getElementById('input_xboxOne').checked) plataformas.push('Xbox One');
+  if (document.getElementById('input_xboxSeries').checked) plataformas.push('Xbox Series');
+  if (document.getElementById('input_ps4').checked) plataformas.push('PS4');
+  if (document.getElementById('input_ps5').checked) plataformas.push('PS5');
+
+
+  var formato = '';
+  if (document.getElementById('input_tdm').checked) formato = 'TDM';
+  if (document.getElementById('input_normal').checked) formato = '5v5';
+  if (document.getElementById('input_contraTodos').checked) formato = 'Free for All';
+
+  var resultado = document.getElementById('input_adm').checked ? 'Administrador' : 'Participantes';
+
+  var inscricao = document.getElementById('publico').checked ? 'Pública' : 'Privada';
+
+  var torneio = {
+    nomeT,
+    nomeJ,
+    plataformas,
+    formato,
+    resultado,
+    inscricao
+
+    }
+    localStorage.setItem('dadosTorneio', JSON.stringify(torneio));
+
+    if (nomeT == ""){
+      alert ('Insira um nome para o torneio!')
+    }else {
+      window.location.href = "torneios.html"
+    }
+  }
+</script>

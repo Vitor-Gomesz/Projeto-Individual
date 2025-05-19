@@ -154,38 +154,5 @@
     var ps5 = input_ps5.value;
     var ps4 = input_ps4.value;
 
-     var plataformas = [];
-  if (document.getElementById('input_pc').checked) plataformas.push('PC');
-  if (document.getElementById('input_xboxOne').checked) plataformas.push('Xbox One');
-  if (document.getElementById('input_xboxSeries').checked) plataformas.push('Xbox Series');
-  if (document.getElementById('input_ps4').checked) plataformas.push('PS4');
-  if (document.getElementById('input_ps5').checked) plataformas.push('PS5');
-
-
-  var formato = '';
-  if (document.getElementById('input_tdm').checked) formato = 'TDM';
-  if (document.getElementById('input_normal').checked) formato = '5v5';
-  if (document.getElementById('input_contraTodos').checked) formato = 'Free for All';
-
-  var resultado = document.getElementById('input_adm').checked ? 'Administrador' : 'Participantes';
-
-  var inscricao = document.getElementById('publico').checked ? 'Pública' : 'Privada';
-
-  var torneio = {
-    nomeT,
-    nomeJ,
-    plataformas,
-    formato,
-    resultado,
-    inscricao
-
-    }
-    localStorage.setItem('dadosTorneio', JSON.stringify(torneio));
-
-    if (nomeT == ""){
-      alert ('Insira um nome para o torneio!')
-    }else {
-      window.location.href = "torneios.html"
-    }
   }
 </script>

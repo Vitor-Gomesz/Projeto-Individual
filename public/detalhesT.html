@@ -6,70 +6,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Detalhes do Torneio</title>
   <link rel="stylesheet" href="./css/detalheT.css">
-  <link rel="icon" href="./assets/icon/Logo-Principal-R6.png" />
+  <link rel="stylesheet" href="./css/estilo.css">
+  <script src="./js/sessao.js"></script>
 </head>
 
 <body onload="carregarDetalhesTorneio()">
   <header>
     <div class="logo">
-      <a href="index.html"><img src="./assets/icon/Logo-Principal-R6.png" alt="Logo Six Frontier"></a>
+      <a href="index.html"><img src="./assets/icon/Logo-Principal-R6.png" alt="Six Frontier Logo"></a>
     </div>
     <nav>
       <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="torneios.html">Torneios</a></li>
+        <li><a href="./index.html">Início</a></li>
+        <li><a href="./torneios.html">Torneios</a></li>
         <li><a href="#dashboard">Dashboard</a></li>
         <li>|</li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="cadastro.html">Cadastrar</a></li>
+        <li><a href="./login.html">Login</a></li>
+        <li><a href="./cadastro.html">Cadastrar</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="container">
-    <div class="torneio-box">
-      <h1 id="nomeTorneio">Torneio Elite R6</h1>
-      <p><strong>Data:</strong> 20/06/2025</p>
-      <p><strong>Descrição:</strong> Competição de nível alto com os melhores jogadores da plataforma!</p>
-      <p><strong>Participantes:</strong> <span id="qtdParticipantes">12</span></p>
+    <section class="card-torneio">
+      <h2 id="tituloTorneio">Nome do Torneio</h2>
+      <p id="descricaoTorneio">Descrição do torneio...</p>
+      <p><strong>Início:</strong> <span id="dtInicio"></span></p>
+      <p><strong>Fim:</strong> <span id="dtFim"></span></p>
+      <p><strong>Status:</strong> <span id="statusTorneio"></span></p>
 
-      <button onclick="participar()">Participar do Torneio</button>
-    </div>
+      <button onclick="participarDoTorneio()">Participar</button>
+
+      <div id="mensagemSucesso" class="mensagem sucesso">Inscrição realizada com sucesso!</div>
+      <div id="mensagemErro" class="mensagem erro">Erro ao se inscrever!</div>
+    </section>
+<div class="detalhes-torneio">
+  <h1 id="nomeTorneio">Nome do Torneio</h1>
+  <p id="descricaoTorneio">Descrição aqui...</p>
+  <p>Data de Início: <span id="dataInicio"></span></p>
+  <p>Status: <span id="statusTorneio"></span></p>
+  <input type="text" id="input_nome_time" placeholder="Digite o nome do seu time">
+  <button onclick="participar()">Participar do Torneio</button>
+</div>
+
+<div id="alerta" style="display:none; color: green; margin-top: 10px;"></div>
   </main>
 
-  <script>
-    function carregarDetalhesTorneio() {
-      fetch('/torneios/detalhes/1')
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById("nomeTorneio").innerText = data.nome;
-          document.getElementById("dataTorneio").innerText = data.data;
-          document.getElementById("descricaoTorneio").innerText = data.descricao;
-          document.getElementById("qtdParticipantes").innerText = data.qtd_participantes;
-        })
-        .catch(erro => {
-          console.error("Erro ao carregar dados do torneio:", erro);
-        });
-    }
-
-    function participar() {
-      var idUsuario = sessionStorage.getItem("ID_USUARIO");
-      var idTorneio = 1;
-
-      fetch('/torneios/participar', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id_usuario: idUsuario, id_torneio: idTorneio })
-      })
-      .then(res => {
-        if (res.ok) {
-          alert("Inscrição confirmada!");
-          carregarDetalhesTorneio();
-        } else {
-          alert("Você já está inscrito ou houve um erro.");
-        }
-      });
-    }
-  </script>
+  <script src="./js/detalhesTorneio.js"></script>
 </body>
+
 </html>
+
+<script>
+  function participar() {
+  var idJogador = sessionStorage.ID_USUARIO;
+  var idTorneio = sessionStorage.ID_TORNEIO;
+  var nomeTime = document.getElementById('input_nome_time').value;
+  var urlParams = new URLSearchParams(window.location.search);
+  var idTorneio = urlParams.get('id');
+  fetch("/torneios/participar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ idJogador, idTorneio, nomeTime })
+  })
+    .then(res => res.json())
+    .then(res => {
+      document.getElementById("alerta").innerText = res.mensagem;
+      document.getElementById("alerta").style.display = "block";
+    })
+    .catch(err => {
+      console.error("Erro ao participar:", err);
+    });
+}
+</script>

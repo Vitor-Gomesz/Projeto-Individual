@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <title>Campeonatos - Six Frontier</title>
   <link rel="stylesheet" href="./css/torneios.css">
-  <link rel="stylesheet" href="./css/estilo.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="./assets/icon/Logo-Principal-R6.png" />
 </head>
-<body>
+<body onload="exibirTorneio()">
 
   <header>
      <div class="logo">
@@ -17,62 +16,68 @@
     <nav>
       <ul>
         <li><a href="./index.html">Início</a></li>
-        <li><a href="">Campeonatos</a></li>
+        <li><a href="">Torneios</a></li>
         <li><a href="">Ranking</a></li>
       </ul>
     </nav>
   </header>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+ <section class="banner">
+  <div class="background-section">
+    <video src="./assets/imgs/Rainbow Six Siege： Jager Elite Trailer-VEED.mp4" autoplay loop muted></video>
+  </div>
 
-  <!-- Botão para capturar a imagem -->
-  <button id="capturar">Capturar Imagem</button>
+  <section id="campeonatos">
+    <h2>Campeonatos Disponíveis</h2>
+    <div class="campeonato-container" id="listaTorneios"></div>
+  </section>
+</section>
 
-
-    <section id="campeonatos">
-      <h2>Campeonatos Disponíveis</h2>
-       
-      <div id="torneio-container"></div>
-
-      <div class="campeonato-container">
-        <section class="campeonato-item">
-          <h3>Campeonato Rainbow Elite</h3>
-          <img src="./assets/imgs/Imagem 1-Sobre-R6.jpg" alt="">
-          <p>Data de início: 15/05/2025</p>
-          <p>Participantes: 16 times</p>
-          <p>Status: Inscrições Abertas</p>
-          <a href="/campeonatos/1">Ver Detalhes</a>
-        </section>
-
-        <section class="campeonato-item">
-          <h3>Copa Six Challenger</h3>
-          <img src="./assets/imgs/Imagem 1-Sobre-R6.jpg" alt="">
-          <p>Data de início: 25/05/2025</p>
-          <p>Participantes: 8 times</p>
-          <p>Status: Em Andamento</p>
-          <a href="/campeonatos/2">Ver Detalhes</a>
-        </section>
-
-        <section class="campeonato-item">
-          <h3>Torneio Tático Final</h3>
-          <img src="./assets/imgs/Imagem 1-Sobre-R6.jpg" alt="">
-          <p>Data de início: 10/04/2025</p>
-          <p>Participantes: 32 times</p>
-          <p>Status: Finalizado</p>
-          <a href="/campeonatos/3">Ver Detalhes</a>
-        </section>
-      </div>
-      <br><br>
-      <a href="./criarT.html" class="botao">Criar um Torneio</a>
-    </section>
-
-
-  <footer>
-    <p>&copy; 2025 Six Frontier - Todos os direitos reservados.</p>
-  </footer>
-
+    <footer>
+      <p>&copy; 2025 Six Frontier - Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
+
 <script>
 
+  var vetorImagensTorneio = [
+  "./assets/imgs/imagem 2 torneios.jpeg",
+  "./assets/imgs/imagem 3 torneios.jpeg",
+  "./assets/imgs/imagem torneios.jpeg",
+];
+function exibirTorneio() {
+
   
-  </script>
+  fetch("/torneios/listar")
+    .then(res => res.json())
+    .then(torneios => {
+      var aparecerCard = document.getElementById("listaTorneios");
+      aparecerCard.innerHTML = "";
+
+      for (var i = 0; i < torneios.length; i++) {
+      var torneio = torneios[i]; 
+      
+      var cardDoTorneio = document.createElement("section");
+      cardDoTorneio.className = "campeonato-item";
+
+      var imagemAleatoria = vetorImagensTorneio[Math.floor(Math.random() * vetorImagensTorneio.length)];
+
+      cardDoTorneio.innerHTML = `
+        <h3>${torneio.nome}</h3>
+        <img src="${imagemAleatoria}" alt="">
+        <p>Data de início: ${new Date(torneio.dtInicio).toLocaleDateString()}</p>
+        <p>Data de Termino: ${new Date(torneio.dtFim).toLocaleDateString()}</p>
+        <p>Descricão: ${torneio.descricao}</p>
+        <p>Vagas Disponiveis: ${torneio.participantes} times</p>
+        <p>Status: ${torneio.statusTorneio}</p>
+        <a href="./detalhesT.html?id=${torneio.idTorneio}">Participar!</a>
+      `;
+
+  aparecerCard.appendChild(cardDoTorneio);
+  }})
+}
+</script>
+
+<!-- Anotações
+
+ essa linha aqui que tema data tive que usar esse new date para converter de strng para data poruqe por padrao o js acha que é so uma string e puxa outros dados -->

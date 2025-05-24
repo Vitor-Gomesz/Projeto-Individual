@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Six Frontier | Cadastro</title>
 
   <script src="./js/sessao.js"></script>
@@ -19,7 +15,7 @@
 <body>
     <header>
         <div class="logo">
-          <a href="index.html"><img src="./assets/icon/Logo-Principal-R6.png"Six Frontier Logo"></a>
+          <a href="index.html"><img src="./assets/icon/Logo-Principal-R6.png"></a>
         </div>
         <nav>
             <ul>
@@ -33,7 +29,7 @@
         </nav>
     </header>
     
-    <div class="form-container">
+    <div class="form_container">
         <h1>Cadastro de Jogador</h1>
         <form action="#">
           
@@ -54,8 +50,10 @@
         <p>Já tem uma conta? <a href="./login.html">Faça login</a></p>
     </div>
 
-    <div id="cardErro" style="display: none; color: red; margin-top: 10px;">
-   <span id="mensagem_erro"></span>
+    <div id="mensagem_erro"></div>
+
+    <!-- <div id="cardErro" style="display: none; color: red; margin-top: 10px;">
+   <span id="mensagem_erro"></span> -->
 </div>
 </body>
 </html>
@@ -82,7 +80,7 @@
       senhaVar == "" ||
       confirmacaoSenhaVar == "" 
     ) {
-      cardErro.style.display = "block";
+      // cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "(Mensagem de erro para todos os campos em branco)";
 
@@ -112,10 +110,10 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
+          // cardErro.style.display = "block";
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+          // mensagem_erro.innerHTML =
+          //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
             window.location = "login.html";

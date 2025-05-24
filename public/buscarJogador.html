@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Buscar Jogador R6</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #111;
+      color: #f0f0f0;
+      padding: 2rem;
+    }
+    h1 {
+      color: #00d9ff;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 4px;
+    }
+    input {
+      width: 250px;
+    }
+    button {
+      background-color: #00d9ff;
+      color: #000;
+      cursor: pointer;
+    }
+    .resultado {
+      background-color: #222;
+      padding: 1rem;
+      margin-top: 2rem;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1> Buscar Jogador R6</h1>
+  <label>Plataforma:</label><br>
+  <input type="text" id="plataforma" placeholder="uplay / psn / xbl"><br>
+  
+  <label>Nome do jogador:</label><br>
+  <input type="text" id="nome" placeholder="Ex: BaIIer"><br>
+  
+  <button onclick="buscar()">Buscar</button>
+
+  <div id="resultado" class="resultado"></div>
+
+  <script>
+    async function buscar() {
+      const plataforma = document.getElementById('plataforma').value;
+      const nome = document.getElementById('nome').value;
+      const resultado = document.getElementById('resultado');
+
+      if (!plataforma || !nome) {
+        resultado.innerText = "Preencha os campos corretamente.";
+        return;
+      }
+
+      resultado.innerText = "Buscando jogador...";
+
+      try {
+        const res = await fetch(`/r6tab/buscar/${plataforma}/${encodeURIComponent(nome)}`);
+        if (!res.ok) {
+          resultado.innerText = "Jogador não encontrado.";
+          return;
+        }
+
+        const dados = await res.json();
+        resultado.innerHTML = `
+          <strong>Nickname:</strong> ${dados.username} <br>
+          <strong>Level:</strong> ${dados.level} <br>
+          <strong>Kill/Death:</strong> ${dados.kd} <br>
+          <strong>Win %:</strong> ${dados.wl} <br>
+        `;
+      } catch (err) {
+        resultado.innerText = "Erro ao consultar API.";
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

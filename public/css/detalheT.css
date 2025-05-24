@@ -1,88 +1,68 @@
-body {
-  font-family: 'Roboto Condensed', sans-serif;
-  background-color: #0f0f0f;
-  color: #fff;
-  margin: 0;
-  padding: 0;
+#participarTorneio {
+  padding: 60px 30px;
+  text-align: center;
 }
 
-.container {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 20px;
-}
-
-.card-torneio {
+.torneio {
+  max-width: 800px;
+  margin: 0 auto 40px;
   background-color: #1e1e1e;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  text-align: left;
 }
 
-.card-torneio h2 {
-  margin-bottom: 15px;
+.info-torneio h2 {
+  color: #FFCC00;
+  margin-bottom: 10px;
   font-size: 28px;
-  color: #f0db4f;
 }
 
-.card-torneio p {
-  margin: 8px 0;
+.info-torneio p {
+  color: #ccc;
+  margin-bottom: 8px;
 }
 
-.detalhes-torneio {
-  background-color: #1c1c1c;
-  color: white;
-  padding: 20px;
-  margin: 40px auto;
-  border-radius: 10px;
+.jogadores-inscritos {
   max-width: 600px;
-  box-shadow: 0px 0px 10px #f3f3f3;
+  margin: 0 auto;
+  text-align: left;
 }
 
-.detalhes-torneio input,
-.detalhes-torneio button {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
+.jogadores-inscritos h3 {
+  color: #00b8f4;
+  margin-bottom: 10px;
 }
 
-.detalhes-torneio button {
-  background-color: #ffaa00;
-  color: black;
-  cursor: pointer;
+.jogadores-inscritos ul {
+  list-style: none;
+  padding-left: 0;
 }
 
-button {
-  background-color: #f0db4f;
-  color: #000;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-button:hover {
-  background-color: #e2c843;
-}
-
-.mensagem {
-  margin-top: 20px;
-  padding: 10px;
-  border-radius: 6px;
-  display: none;
-  font-weight: bold;
-}
-
-.mensagem.sucesso {
-  background-color: #28a745;
+.jogadores-inscritos li {
+  background-color: #2a2a2a;
   color: #fff;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
 }
 
-.mensagem.erro {
-  background-color: #dc3545;
+.botao-container {
+  margin-top: 30px;
+}
+
+.botao {
+  background-color: #00b8f4;
   color: #fff;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.4s;
+}
+
+.botao:hover {
+  background-color: #007a8a;
 }

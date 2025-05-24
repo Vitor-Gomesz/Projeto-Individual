@@ -49,7 +49,7 @@ nav a:hover {
     color: #FFCC00; /* Aqui é onde deixa bonito quando passa o mouse por cima  */
 }
 
-.form-container {
+.form_container {
     width: 100%;
     max-width: 900px;
     margin: 50px auto;
@@ -60,7 +60,7 @@ nav a:hover {
     font-family: 'Orbitron', sans-serif;
 }
 
-.form-container h1 {
+.form_container h1 {
   text-align: center;
   margin-bottom: 20px;
   color: #FFCC00;
@@ -75,8 +75,10 @@ form label {
 }
 
 form input[type="text"],
+form input[type="date"],
+form input[option]
 form select {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   margin-top: 5px;
   border-radius: 4px;
@@ -84,25 +86,29 @@ form select {
 }
 
 /* Checkboxes com imagens (pesqisei na internet  */
-.checkbox-group {
+.checkbox_group {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 0px;
 }
 
-.checkbox-item {
+.checkbox_item, .checkbox_item2{
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 150px;
 }
 
-.checkbox-item input[type="checkbox"] {
+.checkbox_item input[type="checkbox"] {
   display: none;
 }
 
-.checkbox-item label {
+.checkbox_item2 input[type="radio"] {
+  display: none;
+}
+
+.checkbox_item label ,.checkbox_item2 label{
   cursor: pointer;
   text-align: center;
   padding: 5px;
@@ -110,7 +116,7 @@ form select {
   transition: 0.2s;
 }
 
-.checkbox-item img {
+.checkbox_item img, .checkbox_item2 img{
   width: 80px;
   height: 60px;
   object-fit: contain;
@@ -119,25 +125,24 @@ form select {
   border-radius: 8px;
 }
 
-.checkbox-item input[type="checkbox"]:checked + label img {
+.checkbox_item input[type="checkbox"]:checked + label img, .checkbox_item2 input[type="radio"]:checked + label img {
   border-color: #00b8f4;
   background-color: #eef;
 }
-.campo-checkbox {
+.campo_checkbox {
   margin-top: 30px;
 }
 
-.campo-checkbox label{
+.campo_checkbox label{
   color: #00b8f4;
 }
 
 
-.selecao-Unica {
+.selecao_Unica {
   margin-top: 10px;
 }
 
-/* Checkbox com texto dentro do label */
-.selecao-Unica label {
+.selecao_Unica label {
   font-weight: bold;
   cursor: pointer;
   display: inline-block;
@@ -145,19 +150,19 @@ form select {
   color: #00b8f4;
 }
 
-/* Texto explicativo fora do label */
+
 .descricao {
-  margin: 0 0 10px 25px; /* Espaço à esquerda alinhando com checkbox */
+  margin: 0 0 10px 25px; 
   font-size: 0.95rem;
-  color: w;
+  color: white;
 }
 
-/* Ajuste de espaçamento */
+
 input[type="radio"] {
   margin-right: 10px;
 }
 
-/* Botão */
+
 button {
   display: block;
   width: 100%;

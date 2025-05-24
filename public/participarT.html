@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Participar do Torneio Six Frontier</title>
+    <script src="./js/sessao.js"></script>
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="icon" href="./assets/icon/Logo-Principal-R6.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./css/detalheT.css">
+</head>
+
+<body>
+<header>
+    <div class="logo">
+      <a href="index.html"><img src="./assets/icon/Logo-Principal-R6.png"Six Frontier Logo></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="./index.html">Inicio</a></li>
+            <li><a href="./torneios.html">Torneios</a></li>
+    </nav>
+</header>
+
+<section id="participarTorneio">
+    <div class="torneio">
+      <div class="infomaracoesT">
+        <h2 id="titulo-torneio"></h2>
+        <p id="descricao-torneio"></p>
+        <p>Data: <span id="data-torneio"></span></p>
+      </div>
+    </div>
+    
+    <div class="jogadores_inscritos">
+      <h3>Jogadores Inscritos</h3>
+      <ul id="lista-jogadores">
+      </ul>
+    </div>
+
+      <div class="botao_container">
+      <button id="botaoParticipar" class="botao">Participar</button>
+    </div>
+</section>
+
+<footer>
+    &copy; 2025 Six Frontier. Todos os direitos reservados.
+</footer>
+
+<div id="mensagemErro" style="display:none; color:red; margin-top:10px;"></div>
+
+<script>
+  var idTorneio = 2;
+  var idJogador = sessionStorage.idJogadores;
+  console.log("ID do Jogador: ", idJogador);
+
+  var listaJogadores = document.getElementById("lista-jogadores");
+  var botaoParticipar = document.getElementById("botaoParticipar");
+  var mensagemErro = document.getElementById("mensagemErro");
+
+  function carregarDetalhesTorneio() {
+    fetch(`/participarT/${idTorneio}`, { method: "GET" })
+      .then(res => {
+        if (!res.ok) throw "Erro ao buscar detalhes do torneio";
+        return res.json();
+      })
+      .then(dados => {
+        document.getElementById("titulo-torneio").innerText = dados.torneio.nome;
+        document.getElementById("descricao-torneio").innerText = dados.torneio.descricao;
+
+        listaJogadores.innerHTML = ""; 
+          dados.jogadores.forEach(jogador => {
+          var li = document.createElement("li");
+          li.innerText = jogador.gamertag;
+          listaJogadores.appendChild(li);
+        });
+
+        mensagemErro.style.display = "none";
+      })
+      .catch(erro => {
+        mensagemErro.innerText = erro;
+        mensagemErro.style.display = "block";
+      });
+  }
+console.log("idJogador:", idJogador);
+console.log("idTorneio:", idTorneio);
+
+  function participarDoTorneio() {
+    var idJogador = sessionStorage.idJogadores;
+    var idTorneio =  2; 
+
+
+    fetch(`/participarT/participar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idTorneio: idTorneio,
+        idJogador: idJogador
+      }),
+    })
+    .then(res => {
+      if (!res.ok) throw "Erro ao participar do torneio";
+      return res.json();
+    })
+    .then(() => {
+      mensagemErro.style.display = "none";
+      carregarDetalhesTorneio();
+    })
+    .catch(erro => {
+      mensagemErro.innerText = erro;
+      mensagemErro.style.display = "block";
+    });
+  }
+
+  botaoParticipar.addEventListener("click", participarDoTorneio);
+  window.onload = carregarDetalhesTorneio;
+</script>

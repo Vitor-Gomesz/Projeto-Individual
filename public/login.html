@@ -3,12 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AquaTech | Login</title>
-
-
+    <title>Six Frontier | Login</title>
 
   <link rel="stylesheet" href="./css/cadastro.css">
   <link rel="stylesheet" href="./css/estilo.css" />
@@ -25,8 +20,7 @@
         <nav>
             <ul>
                 <li><a href="./index.html">Inicio</a></li>
-                <li><a href="#torneios">Torneios</a></li>
-                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="./torneios.html">Torneios</a></li>
                 <li>|</li>
                 <li><a href="./login.html">Login</a></li>
                 <li><a href="./cadastro.html">Cadastrar</a></li>
@@ -34,7 +28,7 @@
         </nav>
     </header>
     
-    <div class="form-container">
+    <div class="form_container">
         <h1>Login Six Frontier</h1>
         <form action="#">
             <label for="email_input">E-mail</label>
@@ -47,6 +41,7 @@
         </form>
         <p>Não tem uma conta? <a href="./cadastro.html">Realize o seu cadastro!</a></p>
     </div>
+    
     <div id="cardErro" style="display:none; color:red;"></div>
     <span id="mensagem_erro"></span>
     <div id="div_aguardar" style="display: none;">
@@ -72,6 +67,7 @@
 
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
+    var idJogador = sessionStorage.idJogadores;
 
     if (emailVar == "" || senhaVar == "") {
         cardErro.style.display = "block"
@@ -104,11 +100,11 @@
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    sessionStorage.email = json.email;
+                    sessionStorage.gamertag = json.gamertag;
+                    sessionStorage.idJogadores = json.id;
 
+                     console.log("idJogador:", idJogador)
                     setTimeout(function () {
                         window.location = "torneios.html";
                     }, 1000); // apenas para exibir o loading

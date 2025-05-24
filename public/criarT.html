@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Criar Torneio - Six Frontier</title>
-  <link rel="stylesheet" href="../public/css/criarT.css">
+  <link rel="stylesheet" href="./css/criarT.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -15,57 +15,70 @@
     </div>
     <nav>
       <ul>
-        <li><a href="../index.html">Início</a></li>
-        <li><a href="#torneios">Torneios</a></li>
+        <li><a href="./index.html">Início</a></li>
+        <li><a href="./torneios.html">Torneios</a></li>
         <li>|</li>
         <li><a href="#">Voce</a></li>
       </ul>
     </nav>
   </header>
 
-  <div class="form-container">
+  <div class="form_container">
     <h1>Criar Torneio</h1>
 
     <form action="#">
       <label for="input_nomeT">Nome do Torneio</label>  
-      <input type="text" id="input_nomeT" >
+      <input type="text" id="input_nomeT">
+
+      <label for="input_dt_Inicio">Data de inicio do Torneio</label>
+      <input type="date" id="input_dt_Inicio">
+
+      <label for="input_dt_Fim">Data de Fim do Torneio</label>
+      <input type="date" id="input_dt_Fim">
+
+      <label for="input_descricao">Descricão do Torneio</label>
+      <input type="text" id="input_descricao">
+
+      <label for="input_participantes">Quantidade de Participantes</label>
+      <input type="text" id="input_participantes">
 
       <label for="input_jogo">Jogo</label>
       <select name="Jogo" id="input_jogo" >
         <option value="r6">Rainbow Six Siege</option>
       </select>
 
+
       <label>Plataformas</label>
-      <div class="checkbox-group">
-        <div class="checkbox-item">
+      <div class="checkbox_group">
+        <div class="checkbox_item">
           <input type="checkbox" id="input_pc" value="pc" />
           <label for="input_pc">
             <img src="./assets/icon/Icone PC.png.png" alt="PC" />
           </label>
         </div>
 
-        <div class="checkbox-item">
+        <div class="checkbox_item">
           <input type="checkbox" id="input_xboxOne" value="XBOX_ONE" />
           <label for="input_xboxOne">
             <img src="./assets/icon/logo-xbox-one.png" alt="XBOX ONE" />
           </label>
         </div>
 
-        <div class="checkbox-item">
+        <div class="checkbox_item">
           <input type="checkbox" id="input_xboxSeries" value="XBOX_SERIES" />
           <label for="input_xboxSeries">
             <img src="./assets/icon/Xbox Seres Icone.png" alt="XBOX SERIES" />
           </label>
         </div>
 
-        <div class="checkbox-item">
+        <div class="checkbox_item">
           <input type="checkbox" id="input_ps4" value="PS4" />
           <label for="input_ps4">
             <img src="./assets/icon/Icone-PS4.png" alt="PS4" />
           </label>
         </div>
 
-        <div class="checkbox-item">
+        <div class="checkbox_item">
           <input type="checkbox" id="input_ps5" value="PS5" />
           <label for="input_ps5">
             <img src="./assets/icon/Icone-PS5.png" alt="PS5" />
@@ -74,42 +87,42 @@
       </div>
       <div>
         <label>Formato dos Campeonatos</label>
-        <div class="checkbox-item">
-          <input type="checkbox" id="input_tdm" value="TDM" />
+        <div class="checkbox_item2">
+          <input type="radio" name="input_formato"  id="input_tdm" value="TDM" />
           <label for="input_tdm">
             <img src="./assets/icon/TDM.png" alt="tdm" />
           </label>
         </div>
 
-        <div class="checkbox-item">
-          <input type="checkbox" id="input_normal" value="normal" />
+        <div class="checkbox_item2">
+          <input type="radio" name="input_formato" id="input_normal" value="normal" />
           <label for="input_normal">
             <img src="./assets/icon/5v5.png" alt="5v5" />
           </label>
         </div>
         
-          <div class="checkbox-item">
-          <input type="checkbox" id="input_contraTodos" value="contraTodos" />
+          <div class="checkbox_item2">
+          <input type="radio" name="input_formato" id="input_contraTodos" value="contraTodos" />
           <label for="input_contraTodos">
             <img src="./assets/icon/Free for all.png" alt="tdm" />
           </label>
         </div>
       </div>
 
-<div class="campo-checkbox">
+<div class="campo_checkbox">
   <label>Resultado das Partidas</label>
 
-  <div class="selecao-Unica">
-    <input type="radio" id="input_adm" value="adm" />
+  <div class="selecao_Unica">
+    <input type="radio" name="input_adm" id="input_adm" value="adm" />
     <label for="input_adm">Administrador</label>
     <p class="descricao">
       A postagem dos resultados das partidas é uma tarefa exclusiva do administrador.
     </p>
   </div>
 
-  <div class="selecao-Unica">
-    <input type="radio" id="input_participante" value="participante" />
-    <label for="participante">Participantes</label>
+  <div class="selecao_Unica">
+    <input type="radio" name="input_adm" id="input_participante" value="participante" />
+    <label for="input_participante">Participantes</label>
     <p class="descricao">
       Além do administrador, os participantes envolvidos nas partidas têm permissão para realizar a postagem dos seus jogos.
     </p>
@@ -117,10 +130,10 @@
 </div>
 
 
-<div class="campo-checkbox">
+<div class="campo_checkbox">
   <label>Inscrições</label>
 
-  <div class="selecao-Unica">
+  <div class="selecao_Unica">
     <input type="radio" name="input_inscricao" id="publico" value="publico" />
     <label for="publico"><strong>Pública</strong></label>
     <p class="descricao">
@@ -128,31 +141,147 @@
     </p>
   </div>
 
-  <div class="selecao-Unica">
+  <div class="selecao_Unica">
     <input type="radio" name="input_inscricao" id="privado" value="privado" />
     <label for="privado">Privada</label>
     <p class="descricao">
       Somente o administrador está autorizado a fazer as inscrições.
     </p>
   </div>
-</div>
+  </div>
 
       <button type="button" onclick="criarT()">Criar Torneio</button>
     </form>
   </div>
+
+  <div id="mensagem_erro"></div>
+      <div id="cardErro" style="display: none; color: red; margin-top: 10px;">
+   <span id="mensagem_erro"></span>
 </body>
 </html>
 
 <script>
   function criarT(){
 
-    var nomeT = input_nomeT.value;
-    var nomeJ = input_jogo.value;
-    var pc = input_pc.value;
-    var xboxone = input_xboxOne.value;
-    var xboxseres = input_xboxSeries.value;
-    var ps5 = input_ps5.value;
-    var ps4 = input_ps4.value;
+    var nomeTVar = input_nomeT.value;
+    var nomeJVar = input_jogo.value;
+    var pcVar = input_pc.value;
+    var xboxoneVar = input_xboxOne.value;
+    var xboxseresVar = input_xboxSeries.value;
+    var ps5Var = input_ps5.value;
+    var ps4Var = input_ps4.value;
+    var dtInicioVar = input_dt_Inicio.value;
+    var dtFimVar = input_dt_Fim.value;
+    var descricaoVar = input_descricao.value;
+    var participantesVar = input_participantes.value;
+        // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    // Verificando se há algum campo em branco
+    if (
+      nomeTVar == "" ||
+      nomeJVar == "" ||
+      pcVar == "" ||
+      xboxoneVar == "" ||
+      dtInicioVar == "" ||
+      dtFimVar == "" ||
+      xboxseresVar == "" ||
+      ps5Var == "" ||
+      ps4Var == "" 
+  ){
+    
+  }
+    // ) {
+    //   cardErro.style.display = "block";
+    //   mensagem_erro.innerHTML =
+    //     "(Mensagem de erro para todos os campos em branco)";
+
+    //   finalizarAguardar();
+    //   return false;
+      
+    // }  else {
+    //   setInterval(sumirMensagem, 5000);
+    // }
+
+
+    // Enviando o valor da nova input
+    fetch("/criarT/criarT", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeTServer: nomeTVar,
+        dtInicioServer: dtInicioVar,
+        dtFimServer: dtFimVar,
+        participantesServer: participantesVar,
+        descricaoServer : descricaoVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "torneios.html";
+          }, "2000");
+
+          limparFormulario();
+          // finalizarAguardar();
+        } else  {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+      });
+
+    return false;
+
 
   }
+
+  // Listando empresas cadastradas 
+  // function listar() {
+  //   fetch("/empresas/listar", {
+  //     method: "GET",
+  //   })
+  //     .then(function (resposta) {
+  //       resposta.json().then((empresas) => {
+  //         empresas.forEach((empresa) => {
+  //           listaEmpresasCadastradas.push(empresa);
+
+  //           console.log("listaEmpresasCadastradas")
+  //           console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+  //         });
+  //       });
+  //     })
+  //     .catch(function (resposta) {
+  //       console.log(`#ERRO: ${resposta}`);
+  //     });
+  // }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  } 
+
 </script>
+
+<!-- 
+CSS / JS:
+transition 
+keyframe
+style.display.width 
+
+HTML / JS:
+radiobutton 
+-->

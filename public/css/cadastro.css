@@ -4,11 +4,8 @@
     box-sizing: border-box;
 }
 
-
-
-
 /* Formulário de Cadastro */
-.form-container {
+.form_container {
     width: 100%;
     max-width: 500px;
     margin: 50px auto;

@@ -71,7 +71,7 @@ body, header, .banner {
     font-size: 22px;
 }
 
-.background-section {
+.background_section {
     position: absolute;
     top: 0;
     left: 0;
@@ -81,14 +81,14 @@ body, header, .banner {
     overflow: hidden;
 }
 
-.background-section video {
+.background_section video {
     height: 700px;
     width: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-.banner-content {
+.banner_content {
     z-index: 1;
     position: relative;
     padding: 2rem;
@@ -139,16 +139,16 @@ body, header, .banner {
     border-radius: 2px;
 }
 
-.sobre-container {
+.sobre_container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 40px;
 }
-.sobre-container:hover > :not(:hover){
+.sobre_container:hover > :not(:hover){
     opacity: .75;
 }
-.sobre-item {
+.sobre_item {
     width: 320px;
     background-color: #2a2a2a;
     padding: 20px;
@@ -158,40 +158,40 @@ body, header, .banner {
       border-bottom: 2px solid #00b8f4;
 }
 
-.sobre-item:hover {
+.sobre_item:hover {
     transform: translateX(-5px);
     box-shadow: 10px 10px 30px rgba(0,0,0,0.7);
 }
 
-.sobre-item h1 {
+.sobre_item h1 {
     font-size: 20px;
     margin-bottom: 15px;
     color: #FFCC00;
     font-family: 'Orbitron', sans-serif;
 }
 
-.sobre-item img {
+.sobre_item img {
     width: 100%;
     height: auto;
     border-radius: 10px;
     margin-bottom: 15px;
 }
 
-.sobre-item p {
+.sobre_item p {
     font-size: 30px;
     color: #ddd;
     line-height: 1.5;
 }
 
 /* Aquie é a parte do torneio */
-.cta {
+.botao_fim {
     background-color: #222;
     padding: 50px 20px;
     text-align: center; 
     box-sizing: border-box;
 }
 
-.cta h2 {
+.botao_fim h2 {
     font-size: 36px;
     margin-bottom: 20px;
     box-sizing: border-box;

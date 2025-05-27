@@ -1,12 +1,12 @@
 // sessão
 function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
+    var gamertag = sessionStorage.gamertag_usuario;
 
-    var b_usuario = document.getElementById("b_usuario");
+    var b_usuario = document.getElementById("gamertag");
 
-    if (email != null && nome != null) {
-        b_usuario.innerHTML = nome;
+    if (email != null && gamertag != null) {
+        b_usuario.innerHTML = gamertag;
     } else {
         window.location = "../login.html";
     }

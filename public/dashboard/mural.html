@@ -6,51 +6,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Avisos</title>
+    <title>TênisVerso | Partida</title>
 
     <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body onload="validarSessao(), atualizarFeed()" style="background-color: #161618;">
 
-    <div class="janela">
-
-
-        <div class="header-left">
-
-            <h1>AquaTech</h1>
+    <div class="header-left">
+            <h1>TenisVerso</h1>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-            <div class="btn-nav-white">
-                <a href="cards.html">
-                    <h3>Aquários</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav-white">
                 <a href="./dashboard.html">
                     <h3>Gráficos</h3>
                 </a>
-            </div>
 
-            <div class="btn-nav">
-                <h3>Mural de Avisos</h3>
-            </div>
+                <a href="./mural.html">
+                    <h3>Partidas</h3>
+                </a>
 
             <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
+                <h3><img src="../assets/icon/logout.svg" alt="" srcset="">Sair</h3>
             </div>
+
+        </div>
 
         </div>
 
@@ -58,30 +47,38 @@
 
 
             <div class="avisos">
-                <div id="alerta">
-                </div>
+            <div id="alerta">
+            </div>
                 <div class="container">
-                    <h1>Publicar um aviso</h1>
+                    <h1>Adicionar uma partida</h1>
                     <div class="div-form">
-                        <form id="form_postagem" method="post" onsubmit="return publicar()">
-                            <label>
-                                Título:
-                                <br>
-                                <input name="titulo" id="titulo" maxlength="100" type="text">
-                            </label>
-                            <br>
-                            <br>
-                            <label>
-                                Descrição (máximo de 250 caracteres):
-                                <br>
-                                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
-                            </label>
-                            <br>
-                            <br>
-                            <button>Enviar</button>
-                        </form>
+                        <div class="campo">
+                        <p>Quadra:</p>
+                        <select name="" id="select_quadra">
+                            <option value="1">Privada</option>
+                            <option value="2">Pública</option>
+                            <option value="3">Clube</option>
+                        </select>
+                        </div>
+
+                        <div class="campo">
+                            <p>Games ganhos:</p>
+                            <input id="input_gamesUsuario" min="0" type="number" placeholder="Seus games">
+                        </div>
+
+                        <div class="campo">
+                            <p>Games perdidos:</p>
+                            <input id="input_gamesAdversario" min="0" type="number" placeholder="Games adversários">
+                        </div>
+
+                        <div class="campo">
+                            <p>Data:</p>
+                            <input id="input_data" maxlength="100" type="date" placeholder="Data partida">
+                            <button onclick="publicar()">Registrar partida</button>
+                        </div>
+
                     </div>
-                    <h1>Mural de Avisos</h1>
+                    <h1>Histórico de partidas</h1>
                     <div class="div-results">
                         <div id="feed_container" class="feed-container">
                         </div>
@@ -89,10 +86,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-
-
 
 </body>
 
@@ -107,41 +100,59 @@
     }
 
     function publicar() {
-        var idUsuario = sessionStorage.ID_USUARIO;
+    var idUsuario = sessionStorage.ID_USUARIO;
+    var fkQuadra = document.getElementById("select_quadra").value;
+    var resultado = "";
+    var gamesUsuario = document.getElementById("input_gamesUsuario").value;
+    var gamesAdversario = document.getElementById("input_gamesAdversario").value;
+    var dataPartida = document.getElementById("input_data").value;
 
-        var corpo = {
-            titulo: form_postagem.titulo.value,
-            descricao: form_postagem.descricao.value
-        }
-
-        fetch(`/avisos/publicar/${idUsuario}`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(corpo)
-        }).then(function (resposta) {
-
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
-                window.location = "/dashboard/mural.html";
-                limparFormulario();
-                finalizarAguardar();
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
-        });
-
+    if (!gamesUsuario || !gamesAdversario || !dataPartida) {
+        alert("Preencha todos os campos antes de registrar a partida.");
         return false;
-
     }
+
+    if (gamesUsuario < 0 || gamesAdversario < 0) {
+        alert("Games não podem ser negativos.");
+        return false;
+    }
+
+    
+    var corpo = {
+        idUsuario: sessionStorage.ID_USUARIO,
+        fkQuadra: Number(fkQuadra),
+        resultado: "",
+        gamesUsuario: Number(gamesUsuario),
+        gamesAdversario: Number(gamesAdversario),
+        dataPartida: dataPartida
+    };
+    
+    if(gamesUsuario > gamesAdversario){
+        corpo.resultado = "vitoria"
+    }else{
+        corpo.resultado = "derrota"
+    }
+
+    fetch(`/avisos/publicar/${idUsuario}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(corpo)
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            alert("Partida registrada com sucesso!");
+            limparFormulario();
+        } else {
+            alert("Erro ao registrar a partida: " + resposta.status);
+        }
+    }).catch(function (erro) {
+        console.error("Erro na requisição:", erro);
+    });
+
+    return false;
+}
+
 
     function editar(idAviso) {
         sessionStorage.ID_POSTAGEM_EDITANDO = idAviso;
@@ -174,7 +185,7 @@
     }
 
     function atualizarFeed() {
-        fetch("/avisos/listar").then(function (resposta) {
+        fetch(`/avisos/listar/${sessionStorage.ID_USUARIO}`).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
                     var feed = document.getElementById("feed_container");
@@ -197,24 +208,26 @@
                         var spanID = document.createElement("span");
                         var spanTitulo = document.createElement("span");
                         var spanNome = document.createElement("span");
-                        var divDescricao = document.createElement("div");
+                        var spanData = document.createElement("div");
+                        var spanResultado = document.createElement("div");
                         var divButtons = document.createElement("div");
                         var btnEditar = document.createElement("button");
                         var btnDeletar = document.createElement("button");
 
-
-                        spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
-                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-                        btnEditar.innerHTML = "Editar";
-                        btnDeletar.innerHTML = "Deletar";
+                        spanID.innerHTML = "Quadra: <b>" + publicacao.Quadra + "</b>";
+                        spanTitulo.innerHTML = "Games Ganhos: <b>" + publicacao.MeusGames + "</b>";
+                        spanNome.innerHTML = "Games Perdidos: <b>" + publicacao.GamesPerdidos + "</b>";
+                        spanData.innerHTML = "Data: <b>" + new Date(publicacao.DataPartida).toLocaleDateString() + "</b>";
+                        spanResultado.innerHTML = "Resultado: <b>" + publicacao.Resultado + "</b>"; 
+                        btnEditar.innerText = "Editar";
+                        btnDeletar.innerText = "Excluir";
 
                         divPublicacao.className = "publicacao";
                         spanTitulo.id = "inputNumero" + publicacao.idAviso;
                         spanNome.className = "publicacao-nome";
                         spanTitulo.className = "publicacao-titulo";
-                        divDescricao.className = "publicacao-descricao";
+                        spanData.className = "publicacao-descricao";
+                        spanResultado.className = "publicacao-descricao";
 
                         divButtons.className = "div-buttons"
 
@@ -224,16 +237,24 @@
 
                         btnDeletar.className = "publicacao-btn-editar"
                         btnDeletar.id = "btnDeletar" + publicacao.idAviso;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
+                        btnDeletar.setAttribute("onclick", `deletar('${publicacao.idAviso}')`);
 
                         divPublicacao.appendChild(spanID);
-                        divPublicacao.appendChild(spanNome);
                         divPublicacao.appendChild(spanTitulo);
-                        divPublicacao.appendChild(divDescricao);
+                        divPublicacao.appendChild(spanNome);
+                        divPublicacao.appendChild(spanData);
+                        divPublicacao.appendChild(spanResultado);
                         divPublicacao.appendChild(divButtons);
                         divButtons.appendChild(btnEditar);
                         divButtons.appendChild(btnDeletar);
                         feed.appendChild(divPublicacao);
+                        // Verifica se o resultado é derrota
+if(publicacao.Resultado.toLowerCase() === "derrota") {
+  divPublicacao.classList.add("borda-vermelha");
+  btnEditar.classList.add("botao-derrota");
+  btnDeletar.classList.add("botao-derrota");
+}
+
                     }
 
                     finalizarAguardar();

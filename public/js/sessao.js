@@ -20,17 +20,22 @@ function limparSessao() {
 // carregamento (loading)
 function aguardar() {
     var divAguardar = document.getElementById("div_aguardar");
-    divAguardar.style.display = "flex";
+    divAguardar.style.display = "block";
 }
 
 function finalizarAguardar(texto) {
+    // Pega os elementos certos
     var divAguardar = document.getElementById("div_aguardar");
+    var divErro = document.getElementById("cardErro");
+    var spanErro = document.getElementById("mensagem_erro");
+
+    // Esconde o loading
     divAguardar.style.display = "none";
 
-    var divErrosLogin = document.getElementById("div_erros_login");
+    // Exibe erro se tiver texto
     if (texto) {
-        divErrosLogin.style.display = "flex";
-        divErrosLogin.innerHTML = texto;
+        divErro.style.display = "block";
+        spanErro.innerHTML = texto;
     }
 }
 

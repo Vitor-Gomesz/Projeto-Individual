@@ -40,8 +40,21 @@
             <input type="email" id="input_email" name="email" >
             
             <label for="input_senha">Senha</label>
-            <input type="password" id="input_senha" name="senha" maxlength="40">
+            <input type="password" id="input_senha" name="senha" maxlength="40" oninput="validarSenha()">
 
+                <div id="input_senhaBoa">
+                  <p id="input_senhaForte" style="color: green; display: none;">• Tá melhor que a defesa da W7Maquina</p>
+                  <p id="input_senhaMedia" style="color: yellow; display: none;">• Sua senha é ok</p>
+                  <p id="input_senhaFraca" style="color: red; display: none;">• Sua senha é fraca</p>
+                </div>
+
+                <div id="input_requisitoSenha">
+                  <p id="input_requisitoTamanho" style="color: red;">• Mínimo 6 caracteres</p>
+                  <p id="input_requisitoMaiuscula" style="color: red;">• Pelo menos 1 letra maiúscula</p>
+                  <p id="input_requisitoCaracterEspecial" style="color: red;">• Pelo menos 1 caracter especial</p>
+                </div> 
+            <!-- desculpe pelo br -->
+             <br>
             <label for="input_confirmar_senha">Confirmar Senha</label>
             <input type="password" id="input_confirmar_senha" name="confirmar_senha" maxlength="40" placeholder="Confirme sua Senha">
             
@@ -50,10 +63,11 @@
         <p>Já tem uma conta? <a href="./login.html">Faça login</a></p>
     </div>
 
-    <div id="mensagem_erro"></div>
-
-    <!-- <div id="cardErro" style="display: none; color: red; margin-top: 10px;">
-   <span id="mensagem_erro"></span> -->
+    <div id="cardErro">
+      <span id="mensagem_erro"></span>
+    </div>
+    <div id="div_aguardar" style="display: none;">
+    <p>Carregando...</p>
 </div>
 </body>
 </html>
@@ -62,6 +76,65 @@
 
   // Array para armazenar empresas cadastradas para validação de código de ativação 
   let listaEmpresasCadastradas = [];
+
+  function validarSenha(){
+    var senha = input_senha.value;
+
+    var tamanhoSenhaM = senha.length >= 6;
+    
+    var senhaTemMaiusculo = senha.toUpperCase() != senha.toLowerCase()
+
+    var temCaracterEspecial = senha.includes("!") || senha.includes("@") || senha.includes("#") || senha.includes("$") || senha.includes("%") || senha.includes("&") || senha.includes("*");
+
+    var requisitoS = document.getElementById("input_requisitoSenha");
+    var requisitoT = document.getElementById("input_requisitoTamanho");
+    var requisitoM = document.getElementById("input_requisitoMaiuscula");
+    var requisitoE = document.getElementById("input_requisitoCaracterEspecial");
+
+    var senhaBoa = document.getElementById("input_senhaBoa");
+    var senhaF = document.getElementById("input_senhaForte");
+    var senhaM = document.getElementById("input_senhaMedia");
+    var senhaFF = document.getElementById("input_senhaFraca");
+
+    senhaBoa.style.display = "none";
+    senhaF.style.display = "none";
+    senhaM.style.display = "none";
+    senhaFF.style.display = "none";
+
+
+
+    if(tamanhoSenhaM){
+      requisitoS.style.color = "green"
+    } else {
+      requisitoS.style.color = "red"
+    }
+
+    if(senhaTemMaiusculo){
+      requisitoT.style.color = "green"
+    } else {
+      requisitoT.style.color = "red"
+    }
+    if(temCaracterEspecial){
+      requisitoE.style.color = "green"
+    } else {
+      requisitoE.style.color = "red"
+    }
+
+    
+   if (senha.length > 0) {
+    senhaBoa.style.display = "block";
+
+   }
+    if(senha.length < 8){
+      senhaFF.style.display = "block"
+    } else if (senha.length >= 8 && senha.length < 11){
+      senhaM.style.display = "block" 
+    } else {
+      senhaF.style.display = "block"
+    }
+
+  }
+
 
   function cadastrar() {
     // aguardar();
@@ -80,14 +153,28 @@
       senhaVar == "" ||
       confirmacaoSenhaVar == "" 
     ) {
-      // cardErro.style.display = "block";
+      cardErro.style.display = "block";
       mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+        "Preencha todos os campos antes de realizar o cadastro";
 
       finalizarAguardar();
       return false;
       
-    }  else {
+    } else if(!emailVar.includes("@") || !emailVar.includes(".com")){
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "O email é invalido!";
+      finalizarAguardar();
+      return false;
+
+    }else if(confirmacaoSenhaVar != senhaVar){
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "As senhas não coincidem!";
+      finalizarAguardar();
+      return false;
+
+    } else {
       setInterval(sumirMensagem, 5000);
     }
 
@@ -110,10 +197,10 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          // cardErro.style.display = "block";
+          cardErro.style.display = "block";
 
-          // mensagem_erro.innerHTML =
-          //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
             window.location = "login.html";

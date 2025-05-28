@@ -139,7 +139,6 @@ new Chart(ctx1, {
   }
 });
 
-/* Gráfico 2 - Linha com degradê */
 const canvas2 = document.getElementById('myChart2');
 const ctx2 = canvas2.getContext('2d');
 
@@ -179,7 +178,6 @@ new Chart(ctx2, {
   }
 });
 
-/* Gráfico 3 - Doughnut */
 const ctx3 = document.getElementById('myChart3');
 
 new Chart(ctx3, {
@@ -230,9 +228,9 @@ new Chart(ctx3, {
         }
     }
 
-    function alterarTitulo(idAquario) {
-        var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
-        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
+    function alterarTitulo(idJogador) {
+        var tituloAquario = document.getElementById(`tituloAquario${idJogador}`)
+        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idJogador).descricao;
         tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
     }
 
@@ -258,12 +256,12 @@ new Chart(ctx3, {
         }
 
         // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${idAquario}`)
+        let graficoExibir = document.getElementById(`grafico${idJogador}`)
         graficoExibir.classList.remove("display-none")
         graficoExibir.classList.add("display-block")
 
         // alterando estilo do botão
-        let btnExibir = document.getElementById(`btnAquario${idAquario}`)
+        let btnExibir = document.getElementById(`btnAquario${idJogador}`)
         btnExibir.classList.remove("btn-white")
         btnExibir.classList.add("btn-pink")
     }
@@ -279,21 +277,21 @@ new Chart(ctx3, {
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosGrafico(idAquario) {
+    function obterDadosGrafico(idJogador) {
 
-        alterarTitulo(idAquario)
+        alterarTitulo(idJogador)
 
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
         }
 
-        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/medidas/ultimas/${idJogador}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    plotarGrafico(resposta, idAquario);
+                    plotarGrafico(resposta, idJogador);
 
                 });
             } else {
@@ -308,7 +306,7 @@ new Chart(ctx3, {
     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta, idAquario) {
+    function plotarGrafico(resposta, idJogadores) {
 
         console.log('iniciando plotagem do gráfico...');
 
@@ -362,11 +360,11 @@ new Chart(ctx3, {
 
         // Adicionando gráfico criado em div na tela
         let myChart = new Chart(
-            document.getElementById(`myChartCanvas${idAquario}`),
+            document.getElementById(`myChartCanvas${idJogadores}`),
             config
         );
 
-        setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+        setTimeout(() => atualizarGrafico(idJogadores, dados, myChart), 2000);
     }
 
 

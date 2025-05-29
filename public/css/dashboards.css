@@ -101,7 +101,7 @@ body {
     display: flex;
     align-items: stretch;
     height: 40vh;
-    gap: 16px; 
+    gap: 20px; 
 }
 
 .container-legenda{
@@ -112,7 +112,7 @@ body {
     align-items: center;
     flex-direction: row;
     display: flex;
-    justify-content: space-between  ;
+    justify-content: space-evenly ;
     padding: 20px;
     gap: 20px;
 }
@@ -148,7 +148,7 @@ body {
     margin-top: 8px;
 }
 
-.container-graficoPizza,
+.container-graficoRadar,
 .container-graficoBarra,
 .container-graficoLinha {
     width: 50%;
@@ -156,7 +156,3 @@ body {
     border-radius: 12px;
 }
 
-canvas {
-    width: 100% !important;
-    height: 100% !important;
-}

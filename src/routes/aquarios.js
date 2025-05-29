@@ -7,8 +7,8 @@ router.get("/:idJogadores", function (req, res) {
   aquarioController.buscarAquariosPorEmpresa(req, res);
 });
 
-router.post("/cadastrar", function (req, res) {
-  aquarioController.cadastrar(req, res);
+router.post("/cadastrar", function (req, res, idJogador) {
+  aquarioController.cadastrar(req, res, idJogador);
 })
 
 module.exports = router;

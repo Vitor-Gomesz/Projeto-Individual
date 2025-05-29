@@ -86,8 +86,8 @@
             </section>
 
             <section class="container-bottom">
-                <div class="container-graficoPizza">
-                    <canvas id="myChart3"></canvas>
+                <div class="container-graficoRadar">
+                    <canvas id="myChart3"  width="750" height="300"></canvas>
                 </div>
                 <div class="container-graficoBarra">
                     <canvas id="myChart2"></canvas>
@@ -179,19 +179,52 @@ new Chart(ctx2, {
 });
 
 const ctx3 = document.getElementById('myChart3');
-
 new Chart(ctx3, {
-  type: 'doughnut',
+  type: 'radar',
   data: {
-    labels: ["Vitórias", "Derrotas"],
+    labels: ["Iana", "Ash", "Ace", "Mute", "Smoke"],
     datasets: [{
-      label: "Vitórias",
-      data: [50, 30],
-      borderWidth: 0,
-      borderColor: ['#2ecc71', '#e74c3c'],
-      backgroundColor: ['#2ecc71', '#e74c3c'],
-    }],
+      label: "Operadores mais usados", 
+      data: [50, 30, 20, 10, 2],
+      borderWidth: 2,
+      borderColor: '#4ea8de',
+      backgroundColor: 'rgba(78, 168, 222, 0.2)',
+      pointBackgroundColor: '#4ea8de',
+      pointBorderColor: '#ffffff',
+    }]
   },
+  options: {
+    responsive: false,
+    scales: {
+      r: {
+        ticks: {
+          display: false 
+        },
+        angleLines: {
+          color: '#ccc'
+        },
+        grid: {
+          color: '#ddd'
+        },
+        pointLabels: {
+          color: '#fff',
+          font: {
+            size: 14
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: '#fff',
+          font: {
+            size: 14
+          }
+        }
+      }
+    }
+  }
 });
     b_usuario.innerHTML = sessionStorage.gamertag_usuario;
 

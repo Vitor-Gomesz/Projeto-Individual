@@ -75,13 +75,13 @@
 
   // Array para armazenar empresas cadastradas para validação de código de ativação 
   let listaEmpresasCadastradas = [];
-
+  var vetorMaiuscula = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
   function validarSenha(){
     var senha = input_senha.value;
 
     var tamanhoSenhaM = senha.length >= 6;
     
-    var senhaTemMaiusculo = senha.toUpperCase() != senha.toLowerCase()
+    var senhaTemMaiusculo = vetorMaiuscula.includes()
 
     var temCaracterEspecial = senha.includes("!") || senha.includes("@") || senha.includes("#") || senha.includes("$") || senha.includes("%") || senha.includes("&") || senha.includes("*");
 

@@ -1,9 +1,9 @@
 // sessão
 function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
-    var gamertag = sessionStorage.gamertag_usuario;
+    var gamertag = sessionStorage.NOME_USUARIO;
 
-    var b_usuario = document.getElementById("idJogador");
+    var b_usuario = document.getElementById("b_usuario");
 
     if (email != null && gamertag != null) {
         b_usuario.innerHTML = gamertag;

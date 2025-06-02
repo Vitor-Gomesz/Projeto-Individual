@@ -22,10 +22,10 @@ function carregarDetalhesTorneio(idTorneio) {
 function participarDoTorneio(idTorneio, idJogador) {
 var instrucaoSql = `
     INSERT INTO jogadores_dos_torneios (fkJogadores, fkTorneios)
-    SELECT ${idJogador}, 2
+    SELECT ${idJogador}, ${idTorneio}
     WHERE NOT EXISTS (
         SELECT 1 FROM jogadores_dos_torneios
-        WHERE fkJogadores = ${idJogador} AND fkTorneios = 2
+        WHERE fkJogadores = ${idJogador} AND fkTorneios = ${idTorneio}
     );
 `;
     return database.executar(instrucaoSql);

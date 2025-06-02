@@ -49,72 +49,74 @@
 </footer>
 
 <div id="mensagemErro" style="display:none; color:red; margin-top:10px;"></div>
-
 <script>
-  var idTorneio = 2;
-  var idJogador = sessionStorage.idJogadores;
-  console.log("ID do Jogador: ", idJogador);
+      window.onload = function () {
+        var idTorneio = 2
+        var idJogador = sessionStorage.idJogador;
+        console.log("ID do Jogador: ", idJogador);
 
-  var listaJogadores = document.getElementById("lista-jogadores");
-  var botaoParticipar = document.getElementById("botaoParticipar");
-  var mensagemErro = document.getElementById("mensagemErro");
+        if (!idJogador) {
+          alert("Você precisa estar logado para participar do torneio.");
+          window.location.href = "login.html";
+          return;
+        }
 
-  function carregarDetalhesTorneio() {
-    fetch(`/participarT/${idTorneio}`, { method: "GET" })
-      .then(res => {
-        if (!res.ok) throw "Erro ao buscar detalhes do torneio";
-        return res.json();
-      })
-      .then(dados => {
-        document.getElementById("titulo-torneio").innerText = dados.torneio.nome;
-        document.getElementById("descricao-torneio").innerText = dados.torneio.descricao;
+        var listaJogadores = document.getElementById("lista-jogadores");
+        var botaoParticipar = document.getElementById("botaoParticipar");
+        var mensagemErro = document.getElementById("mensagemErro");
 
-        listaJogadores.innerHTML = ""; 
-          dados.jogadores.forEach(jogador => {
-          var li = document.createElement("li");
-          li.innerText = jogador.gamertag;
-          listaJogadores.appendChild(li);
-        });
+        function carregarDetalhesTorneio() {
+          fetch(`/participarT/${idTorneio}`, { method: "GET" })
+            .then(res => {
+              if (!res.ok) throw "Erro ao buscar detalhes do torneio";
+              return res.json();
+            })
+            .then(dados => {
+              document.getElementById("titulo-torneio").innerText = dados.torneio.nome;
+              document.getElementById("descricao-torneio").innerText = dados.torneio.descricao;
 
-        mensagemErro.style.display = "none";
-      })
-      .catch(erro => {
-        mensagemErro.innerText = erro;
-        mensagemErro.style.display = "block";
-      });
-  }
-console.log("idJogador:", idJogador);
-console.log("idTorneio:", idTorneio);
+              listaJogadores.innerHTML = ""; 
+              dados.jogadores.forEach(jogador => {
+                var li = document.createElement("li");
+                li.innerText = jogador.gamertag;
+                listaJogadores.appendChild(li);
+              });
 
-  function participarDoTorneio() {
-    var idJogador = sessionStorage.idJogadores;
-    var idTorneio =  2; 
+              mensagemErro.style.display = "none";
+            })
+            .catch(erro => {
+              mensagemErro.innerText = erro;
+              mensagemErro.style.display = "block";
+            });
+        }
 
+        function participarDoTorneio() {
+          var idJogador = sessionStorage.idJogador;
+          fetch(`/participarT/participar`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              idTorneio: idTorneio,
+              idJogador: sessionStorage.idJogador
+            }),
+          })
+          .then(res => {
+            if (!res.ok) throw "Erro ao participar do torneio";
+            return res.json();
+          })
+          .then(() => {
+            mensagemErro.style.display = "none";
+            carregarDetalhesTorneio();
+          })
+          .catch(erro => {
+            mensagemErro.innerText = erro;
+            mensagemErro.style.display = "block";
+          });
+        }
 
-    fetch(`/participarT/participar`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        idTorneio: idTorneio,
-        idJogador: idJogador
-      }),
-    })
-    .then(res => {
-      if (!res.ok) throw "Erro ao participar do torneio";
-      return res.json();
-    })
-    .then(() => {
-      mensagemErro.style.display = "none";
-      carregarDetalhesTorneio();
-    })
-    .catch(erro => {
-      mensagemErro.innerText = erro;
-      mensagemErro.style.display = "block";
-    });
-  }
-
-  botaoParticipar.addEventListener("click", participarDoTorneio);
-  window.onload = carregarDetalhesTorneio;
-</script>
+        botaoParticipar.addEventListener("click", participarDoTorneio);
+        carregarDetalhesTorneio();
+      };
+    </script>

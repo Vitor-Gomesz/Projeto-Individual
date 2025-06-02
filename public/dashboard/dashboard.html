@@ -111,7 +111,7 @@
       const canvas3 = document.getElementById('myChart3');
       const ctx3 = canvas3.getContext('2d');
       b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
+      var idJogador = sessionStorage.idJogador;
   obterDadosGrafico()
   }
 const canvas1 = document.getElementById('myChart');
@@ -328,7 +328,7 @@ const ctx3 = canvas3.getContext('2d');
     function obterDadosGrafico(idJogador) {
 
   
-
+        var idJogador = sessionStorage.idJogador;
         // if (proximaAtualizacao != undefined) {
         //     clearTimeout(proximaAtualizacao);
         // }
@@ -354,7 +354,7 @@ const ctx3 = canvas3.getContext('2d');
     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta, idJogadores) {
+    function plotarGrafico(resposta, idJogador) {
 
         console.log('iniciando plotagem do gráfico...');
 
@@ -390,7 +390,7 @@ const ctx3 = canvas3.getContext('2d');
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             labels.push(registro.DATA_REGISTRO);
-            winRates.push(Number(registro.winRate));
+            winRates.push(Number(registro.WIN_RATE));
             kds.push(Number(registro.KD));
         }
 

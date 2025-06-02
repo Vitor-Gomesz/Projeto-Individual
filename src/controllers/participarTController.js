@@ -28,7 +28,7 @@ function carregarDetalhesTorneio(req, res) {
 }
 
 function participarDoTorneio(req, res) {
-    var idTorneio = req.body.idTorneio;
+    var idTorneio = req.params.idTorneio;
     var idJogador = req.body.idJogador; 
 
     if (!idJogador || !idTorneio) {
@@ -36,6 +36,9 @@ function participarDoTorneio(req, res) {
     }
 
     participarTModel.participarDoTorneio(idTorneio, idJogador)
+        .then(() => {
+        res.status(201).json({ mensagem: "Jogador inscrito com sucesso!" });
+        })
         .catch(erro => {
             console.error(erro);
             res.status(500).json(erro.sqlMessage || "Erro no servidor");

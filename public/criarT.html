@@ -174,6 +174,7 @@
     var dtFimVar = input_dt_Fim.value;
     var descricaoVar = input_descricao.value;
     var participantesVar = input_participantes.value;
+    var idTorneio = sessionStorage.idTorneio;
         // aguardar();
 
     //Recupere o valor da nova input pelo nome do id
@@ -219,6 +220,7 @@
         dtFimServer: dtFimVar,
         participantesServer: participantesVar,
         descricaoServer : descricaoVar,
+        idTorneio: idTorneio
       }),
     })
       .then(function (resposta) {

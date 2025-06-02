@@ -67,7 +67,6 @@
 
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
-    var idJogador = sessionStorage.idJogadores;
 
     if (emailVar == "" || senhaVar == "") {
         cardErro.style.display = "block"
@@ -101,10 +100,10 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO  = json.gamertag;
-                    sessionStorage.ID_USUARIO  = json.idJogador;
+                    sessionStorage.NOME_USUARIO = json.gamertag;
+                    sessionStorage.idJogador = json.id;
 
-                     console.log("idJogador:", idJogador)
+                     console.log("idJogador:",  sessionStorage.idJogador)
                     setTimeout(function () {
                         window.location = "torneios.html";
                     }, 1000); // apenas para exibir o loading

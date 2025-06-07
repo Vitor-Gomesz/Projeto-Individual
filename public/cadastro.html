@@ -58,15 +58,17 @@
             <input type="password" id="input_confirmar_senha" name="confirmar_senha" maxlength="40" placeholder="Confirme sua Senha">
             
             <button type="button" onclick="cadastrar()">Cadastrar</button>
+              <div id="cardErro">
+                  <span id="mensagem_erro" style="color: red;"></span>
+              </div>
+
+              <div id="div_aguardar" style="display: none;">
+                <p>Carregando...</p>
+              </div>
+              <br>
         </form>
         <p>Já tem uma conta? <a href="./login.html">Faça login</a></p>
     </div>
-
-    <div id="cardErro">
-      <span id="mensagem_erro"></span>
-    </div>
-    <div id="div_aguardar" style="display: none;">
-    <p>Carregando...</p>
 </div>
 </body>
 </html>
@@ -75,13 +77,21 @@
 
   // Array para armazenar empresas cadastradas para validação de código de ativação 
   let listaEmpresasCadastradas = [];
-  var vetorMaiuscula = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
   function validarSenha(){
     var senha = input_senha.value;
 
-    var tamanhoSenhaM = senha.length >= 6;
+    var tamanhoSenhaM = senha.length;
     
-    var senhaTemMaiusculo = vetorMaiuscula.includes()
+    var senhaTemMaiusculo = false;
+
+    for (var i = 0; i < senha.length; i++) {
+      var caracter = senha[i];
+      if (caracter >= 'A' && caracter <= 'Z') {
+
+      senhaTemMaiusculo = true;
+      break; 
+  }
+}
 
     var temCaracterEspecial = senha.includes("!") || senha.includes("@") || senha.includes("#") || senha.includes("$") || senha.includes("%") || senha.includes("&") || senha.includes("*");
 
@@ -102,17 +112,18 @@
 
 
 
-    if(tamanhoSenhaM){
-      requisitoS.style.color = "green"
-    } else {
-      requisitoS.style.color = "red"
-    }
-
-    if(senhaTemMaiusculo){
+    if(tamanhoSenhaM >= 6){
       requisitoT.style.color = "green"
     } else {
       requisitoT.style.color = "red"
     }
+
+    if(senhaTemMaiusculo ){
+      requisitoM.style.color = "green"
+    } else {
+      requisitoM.style.color = "red"
+    }
+
     if(temCaracterEspecial){
       requisitoE.style.color = "green"
     } else {
@@ -134,6 +145,23 @@
 
   }
 
+  function senhaEhValida(senha) {
+  var temTamanhoValido = senha.length >= 6;
+
+  var temMaiuscula = false;
+  for (var i = 0; i < senha.length; i++) {
+    var char = senha[i];
+    if (char >= 'A' && char <= 'Z') {
+      temMaiuscula = true;
+      break;
+    }
+  }
+
+  var temEspecial = senha.includes("!") || senha.includes("@") || senha.includes("#") ||
+                    senha.includes("$") || senha.includes("%") || senha.includes("&") || senha.includes("*");
+
+  return temTamanhoValido && temMaiuscula && temEspecial;
+}
 
   function cadastrar() {
     // aguardar();
@@ -166,14 +194,19 @@
       finalizarAguardar();
       return false;
 
-    }else if(confirmacaoSenhaVar != senhaVar){
+    } else if(confirmacaoSenhaVar != senhaVar){
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "As senhas não coincidem!";
       finalizarAguardar();
       return false;
 
-    } else {
+    } else if (!senhaEhValida(senhaVar)) {
+      alert("Erro ao realizar o cadastro, Senha invalida verifique se contem todos os requisitos necessarios!");
+      finalizarAguardar();
+      return false;
+
+    } else  {
       setInterval(sumirMensagem, 5000);
     }
 

@@ -1,25 +1,7 @@
-var database = require("../database/config");
-
-function participarTorneio(req, res) {
-  var { idJogador, idTorneio, nomeTime } = req.body;
-
-  var instrucao = `
-    INSERT INTO jogadores_dos_torneios (fkJogadores, fkTorneios, nomeTime)
-    VALUES (${idJogador}, ${idTorneio}, '${nomeTime}');
-  `;
-
-  database.executar(instrucao)
-    .then(() => res.status(200).json({ mensagem: "Participação registrada!" }))
-    .catch(erro => {
-      console.log(erro);
-      res.status(500).json({ erro: "Erro ao registrar participação." });
-    });
-}
+const torneioModel = require("../models/torneioModel");
 
 function listarTorneios(req, res) {
-  var instrucao = `SELECT * FROM torneios`;
-
-  database.executar(instrucao)
+  torneioModel.listarTorneios()
     .then(resultado => res.status(200).json(resultado))
     .catch(erro => {
       console.error(erro);
@@ -27,7 +9,18 @@ function listarTorneios(req, res) {
     });
 }
 
+function participarTorneio(req, res) {
+  const { idJogador, idTorneio } = req.body;
+
+  torneioModel.participarTorneio(idJogador, idTorneio, )
+    .then(() => res.status(200).json({ mensagem: "Participação registrada!" }))
+    .catch(erro => {
+      console.error(erro);
+      res.status(500).json({ erro: "Erro ao registrar participação." });
+    });
+}
+
 module.exports = {
-  participarTorneio,
-  listarTorneios
+  listarTorneios,
+  participarTorneio
 };

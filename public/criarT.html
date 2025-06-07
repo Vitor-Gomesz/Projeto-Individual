@@ -166,15 +166,26 @@
     var nomeTVar = input_nomeT.value;
     var nomeJVar = input_jogo.value;
     var pcVar = input_pc.value;
-    var xboxoneVar = input_xboxOne.value;
-    var xboxseresVar = input_xboxSeries.value;
-    var ps5Var = input_ps5.value;
-    var ps4Var = input_ps4.value;
     var dtInicioVar = input_dt_Inicio.value;
     var dtFimVar = input_dt_Fim.value;
     var descricaoVar = input_descricao.value;
     var participantesVar = input_participantes.value;
     var idTorneio = sessionStorage.idTorneio;
+
+    const plataformasSelecionadas = [];
+    const checkboxPlataformas = document.querySelectorAll('.checkbox_group input[type="checkbox"]');
+
+    checkboxPlataformas.forEach(cb => {
+     if (cb.checked) {
+      plataformasSelecionadas.push(cb.value);
+      }
+    });
+
+    const formato = document.querySelector('input[name="input_formato"]:checked')?.value;
+    
+    const resultado = document.querySelector('input[name="input_adm"]:checked')?.value;
+
+    const tipoInscricao = document.querySelector('input[name="input_inscricao"]:checked')?.value;
         // aguardar();
 
     //Recupere o valor da nova input pelo nome do id
@@ -183,13 +194,8 @@
     if (
       nomeTVar == "" ||
       nomeJVar == "" ||
-      pcVar == "" ||
-      xboxoneVar == "" ||
       dtInicioVar == "" ||
-      dtFimVar == "" ||
-      xboxseresVar == "" ||
-      ps5Var == "" ||
-      ps4Var == "" 
+      dtFimVar == "" 
   ){
     
   }
@@ -220,7 +226,11 @@
         dtFimServer: dtFimVar,
         participantesServer: participantesVar,
         descricaoServer : descricaoVar,
-        idTorneio: idTorneio
+        idTorneio: idTorneio,
+        plataformasServer: plataformasSelecionadas,
+        formatoServer : formato,
+        resultadoServer: resultado,
+        tipoInscricaoSever : tipoInscricao
       }),
     })
       .then(function (resposta) {

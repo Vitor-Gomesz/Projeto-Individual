@@ -27,9 +27,11 @@
 <section id="participarTorneio">
     <div class="torneio">
       <div class="infomaracoesT">
-        <h2 id="titulo-torneio"></h2>
+        <h2 id="titulo_torneio"></h2>
+        <p id="descricao_torneio"></p>
+        <p>Data: <span id="data_torneio"></span></p>
         <p id="descricao-torneio"></p>
-        <p>Data: <span id="data-torneio"></span></p>
+        <p id="descricao-torneio"></p>
       </div>
     </div>
     
@@ -51,9 +53,11 @@
 <div id="mensagemErro" style="display:none; color:red; margin-top:10px;"></div>
 <script>
       window.onload = function () {
-        var idTorneio = 2
+        var ID_TORNEIO = sessionStorage.ID_TORNEIO;
         var idJogador = sessionStorage.idJogador;
         console.log("ID do Jogador: ", idJogador);
+        console.log("ID do Torneio: ", ID_TORNEIO);
+
 
         if (!idJogador) {
           alert("Você precisa estar logado para participar do torneio.");
@@ -66,22 +70,27 @@
         var mensagemErro = document.getElementById("mensagemErro");
 
         function carregarDetalhesTorneio() {
-          fetch(`/participarT/${idTorneio}`, { method: "GET" })
+          fetch(`/participarT/${ID_TORNEIO}`, { method: "GET" })
             .then(res => {
               if (!res.ok) throw "Erro ao buscar detalhes do torneio";
               return res.json();
             })
             .then(dados => {
+              let dataFormatada = new Date(dados.torneio.dtInicio).toLocaleDateString()
               document.getElementById("titulo-torneio").innerText = dados.torneio.nome;
               document.getElementById("descricao-torneio").innerText = dados.torneio.descricao;
 
+              document.getElementById("data-torneio").innerText = dataFormatada
+
               listaJogadores.innerHTML = ""; 
+              if (dados.jogadores.lenght > 0) {
               dados.jogadores.forEach(jogador => {
-                var li = document.createElement("li");
-                li.innerText = jogador.gamertag;
-                listaJogadores.appendChild(li);
+                var lista = document.createElement("lista");
+                lista.innerText = jogador.gamertag;
+                listaJogadores.appendChild(lista);
               });
 
+            }
               mensagemErro.style.display = "none";
             })
             .catch(erro => {
@@ -98,7 +107,7 @@
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              idTorneio: idTorneio,
+              idTorneio: ID_TORNEIO,
               idJogador: sessionStorage.idJogador
             }),
           })

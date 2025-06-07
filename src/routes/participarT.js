@@ -4,7 +4,7 @@ var router = express.Router();
 var participarTController = require("../controllers/participarTController");
 
 // GET /torneios/:id — pega detalhes do torneio + jogadores inscritos
-router.get("/:idTorneio", function (req, res) {
+router.get("/:ID_TORNEIO", function (req, res) {
   participarTController.carregarDetalhesTorneio(req, res);
 });
 

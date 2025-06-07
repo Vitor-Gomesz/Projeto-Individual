@@ -41,6 +41,13 @@ function criarT(req, res) {
     var dtInicioVar = req.body.dtInicioServer;
     var dtFimVar = req.body.dtFimServer;
 
+    const {
+        plataformasServer,
+        formatoServer,
+        resultadoServer,
+        tipoInscricaoSever
+    } = req.body 
+
     if (nomeTVar == undefined) {
         res.status(400).send("O nome do torneio está undefined!");
     } else if (participantesVar == undefined) {
@@ -48,7 +55,7 @@ function criarT(req, res) {
     } else if (descricaoVar == undefined) {
         res.status(400).send("A descrição está undefined!");
     } else {
-        criarTModel.criarT(nomeTVar, participantesVar, descricaoVar, dtInicioVar, dtFimVar)
+        criarTModel.criarT(nomeTVar, participantesVar, descricaoVar, dtInicioVar, dtFimVar,plataformasServer.join(','),formatoServer,resultadoServer, tipoInscricaoSever)
             .then(function (resultado) {
                 res.json(resultado);
             })

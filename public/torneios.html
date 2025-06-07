@@ -56,16 +56,16 @@
   var vetorImagensTorneio = [
   "./assets/imgs/imagem 2 torneios.jpeg",
   "./assets/imgs/imagem 3 torneios.jpeg",
-  "./assets/imgs/imagem torneios.jpeg",
-  "./assets/imgs/imagem torneios.jpeg",
-  "./assets/imgs/imagem torneios.jpeg",
-  "./assets/imgs/imagem torneios.jpeg",
-  "./assets/imgs/imagem torneios.jpeg",
-  "./assets/imgs/imagem torneios.jpeg",
-  "./assets/imgs/imagem torneios.jpeg",
-  "./assets/imgs/imagem torneios.jpeg",
-  "./assets/imgs/imagem torneios.jpeg",
-  "./assets/imgs/imagem torneios.jpeg",
+  "./assets/imgs/imagem torneios.jpeg"
+  // "./assets/imgs/imagem torneios.jpeg",
+  // "./assets/imgs/imagem torneios.jpeg",
+  // "./assets/imgs/imagem torneios.jpeg",
+  // "./assets/imgs/imagem torneios.jpeg",
+  // "./assets/imgs/imagem torneios.jpeg",
+  // "./assets/imgs/imagem torneios.jpeg",
+  // "./assets/imgs/imagem torneios.jpeg",
+  // "./assets/imgs/imagem torneios.jpeg",
+  // "./assets/imgs/imagem torneios.jpeg",
 ];
 function exibirTorneio() {
 
@@ -84,23 +84,27 @@ function exibirTorneio() {
 
       var imagemAleatoria = vetorImagensTorneio[Math.floor(Math.random() * vetorImagensTorneio.length)];
 
-      cardDoTorneio.innerHTML = `
+       cardDoTorneio.innerHTML = `
         <h3>${torneio.nome}</h3>
-        <img src="${imagemAleatoria}" alt="">
-        <p>Data de início: ${new Date(torneio.dtInicio).toLocaleDateString()}</p>
-        <p>Data de Termino: ${new Date(torneio.dtFim).toLocaleDateString()}</p>
-        <p>Descricão: ${torneio.descricao}</p>
-        <p>Vagas Disponiveis: ${torneio.participantes} times</p>
-        <p>Status: ${torneio.statusTorneio}</p>
-        <a href="./participarT.html?id=${torneio.idTorneio}">Participar!</a>
+        <img src="${imagemAleatoria}" alt="" />
+        <p>Data de início:</strong> ${new Date(torneio.dtInicio).toLocaleDateString()}</p>
+        <p>Data de término:</strong> ${new Date(torneio.dtFim).toLocaleDateString()}</p>
+        <p>Descrição:</strong> ${torneio.descricao}</p>
+        <p>Vagas disponíveis:</strong> ${torneio.qtdParticipantes}</p>
+        <p>Plataformas:</strong> ${torneio.plataformas}</p>
+        <p>Formato:</strong> ${torneio.formato}</p>
+        <p>Resultado por:</strong> ${torneio.resultadoPor}</p>
+        <p>Tipo inscrição:</strong> ${torneio.tipoInscricao}</p>
+        <a href="./participarT.html?id=${torneio.idTorneios}">Participar!</a>
       `;
 
+        sessionStorage.ID_TORNEIO = torneio.idTorneios
   aparecerCard.appendChild(cardDoTorneio);
   }})
 }
   function menu() {
     var menu = document.getElementById('abaMenu');
-    if (menu.style.right === '0px') {
+    if (menu.style.right === '0px') { 
       menu.style.right = '-300px'; // fecha
     } else {
       menu.style.right = '0px'; // abre

@@ -25,30 +25,43 @@
 </header>
 
 <section id="participarTorneio">
-    <div class="torneio">
-      <div class="infomaracoesT">
-        <h2 id="titulo_torneio"></h2>
-        <p id="descricao_torneio"></p>
-        <p>Data: <span id="data_torneio"></span></p>
-        <p id="plataformas"></p>
-        <p id="formato"></p>
-      </div>
+  <div class="torneio">
+    <div class="infomaracoesT">
+      <h2 id="titulo_torneio"></h2>
+      <p>Descrição: <span id="descricao_torneio"></span></p>
+      <p>Data: <span id="data_torneio"></span></p>
+      <p>Plataformas: <span id="plataformas"></span></p>
+      <p>Modo: <span id="formato"></span></p>
     </div>
-    
-    <div class="jogadores_inscritos">
-      <h3>Jogadores Inscritos</h3>
-      <ul id="lista-jogadores">
+  </div>
+
+  <div class="times-container">
+    <div class="time" id="equipeX">
+      <h3>Equipe Rainbow</h3>
+      <ul id="listaEquipeX">
+        <li class="slot">-</li>
+        <li class="slot">-</li>
+        <li class="slot">-</li>
+        <li class="slot">-</li>
+        <li class="slot">-</li>
       </ul>
     </div>
 
-      <div class="botao_container">
-      <button id="botaoParticipar" class="botao">Participar</button>
+    <div class="time" id="equipeY">
+      <h3>Nighthaven</h3>
+      <ul id="listaEquipeY">
+        <li class="slot">-</li>
+        <li class="slot">-</li>
+        <li class="slot">-</li>
+        <li class="slot">-</li>
+        <li class="slot">-</li>
+      </ul>
     </div>
-</section>
+  </div>
 
-<footer>
-    &copy; 2025 Six Frontier. Todos os direitos reservados.
-</footer>
+   <div class="botao_container">
+    <button id="botaoParticipar" class="botao">Participar</button>
+  </div>
 
 <div id="mensagemErro" style="display:none; color:red; margin-top:10px;"></div>
 <script>
@@ -67,7 +80,29 @@
 
         var listaJogadores = document.getElementById("lista-jogadores");
         var botaoParticipar = document.getElementById("botaoParticipar");
+        var listaEquipeX = document.getElementById("listaEquipeX");
+        var listaEquipeY = document.getElementById("listaEquipeY");
         var mensagemErro = document.getElementById("mensagemErro");
+
+         function preencherSlots(equipeXJogadores, equipeYJogadores) {
+
+          listaEquipeX.innerHTML = "";
+          listaEquipeY.innerHTML = "";
+
+          for (var i = 0; i < 5; i++) {
+            var li = document.createElement("li");
+            li.classList.add("slot");
+            li.innerText = equipeXJogadores[i] ? equipeXJogadores[i].gamertag : "-";
+            listaEquipeX.appendChild(li);
+          }
+
+          for (var i = 0; i < 5; i++) {
+            var li = document.createElement("li");
+            li.classList.add("slot");
+            li.innerText = equipeYJogadores[i] ? equipeYJogadores[i].gamertag : "-";
+            listaEquipeY.appendChild(li);
+          }
+        }
 
         function carregarDetalhesTorneio() {
           fetch(`/participarT/${ID_TORNEIO}`, { method: "GET" })
@@ -83,16 +118,14 @@
               document.getElementById("plataformas").innerText = dados.torneio.plataformas;
               document.getElementById("formato").innerText = dados.torneio.formato;
               document.getElementById("data_torneio").innerText = dataFormatada;
+              
+              var jogadores = dados.jogador || [];
 
-              listaJogadores.innerHTML = ""; 
-              if (dados.jogador.length > 0) {
-              dados.jogador.forEach(jogador => {
-                var li = document.createElement("li");
-                li.innerText = jogador.gamertag;
-                listaJogadores.appendChild(li);
-              });
+              var equipeXJogadores = jogadores.slice(0, 5);
+              var equipeYJogadores = jogadores.slice(5, 10);
 
-            }
+              preencherSlots(equipeXJogadores, equipeYJogadores);
+
               mensagemErro.style.display = "none";
             })
             .catch(erro => {

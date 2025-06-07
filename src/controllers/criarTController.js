@@ -55,7 +55,7 @@ function criarT(req, res) {
     } else if (descricaoVar == undefined) {
         res.status(400).send("A descrição está undefined!");
     } else {
-        criarTModel.criarT(nomeTVar, participantesVar, descricaoVar, dtInicioVar, dtFimVar,plataformasServer.join(','),formatoServer,resultadoServer, tipoInscricaoSever)
+        criarTModel.criarT(nomeTVar, participantesVar, descricaoVar, dtInicioVar, dtFimVar,plataformasServer.join(', '),formatoServer,resultadoServer, tipoInscricaoSever)
             .then(function (resultado) {
                 res.json(resultado);
             })

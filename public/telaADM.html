@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel ADM - Atualizar Estatísticas</title>
+  <link rel="stylesheet" href="./css/telaADM.css">
+</head>
+<body>
+  <header>
+    <h1>Painel do Administrador</h1>
+  </header>
+
+    <section class="formulario">
+      <h2>Atualizar Estatísticas do Jogador</h2>
+
+      <section class="box_input">
+        <label for="idJogador">ID do Jogador</label>
+        <input type="number" id="idJogador" placeholder="Digite o ID do jogador" required>
+      </section>
+
+      <section class="box_input">
+        <h3>Taxa de Vitória</h3>
+        <label for="vitorias">Partidas Vencidas</label>
+        <input type="number" id="vitorias" placeholder="Qtd. Vitórias">
+
+        <label for="derrotas">Partidas Perdidas</label>
+        <input type="number" id="derrotas" placeholder="Qtd. Derrotas">
+      </section>
+
+      <section class="box_input">
+        <h3>K/D Ratio</h3>
+        <label for="kills">Kills</label>
+        <input type="number" id="kills" placeholder="Qtd. Kills">
+
+        <label for="mortes">Mortes</label>
+        <input type="number" id="mortes" placeholder="Qtd. Mortes">
+      </section>
+
+      <section class="box_input">
+        <h3>Pontuação</h3>
+        <label for="pontuacao">Pontuação Total</label>
+        <input type="number" id="pontuacao" placeholder="Pontuação do jogador (opcional)">
+      </section>
+
+
+      <button onclick="enviarEstatisticas()">Cadastrar / Atualizar</button>
+
+      <div id="mensagem" class="mensagem"></div>
+    </section>
+</body>
+</html>

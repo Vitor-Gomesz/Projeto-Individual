@@ -16,8 +16,8 @@ function criarT(nomeTVar, participantes, descricao, dtInicio, dtFim,plataformasS
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO torneios (nome, dtInicio, dtFim, descricao, qtdParticipantes, plataformas, formato, resultadoPor, tipoInscricao, statusTorneio)
-        VALUES ('${nomeTVar}', '${dtInicio}', '${dtFim}', '${descricao}', '${participantes}', '${plataformasServer}', '${formatoServer}', '${resultadoServer}', '${tipoInscricaoSever}', '${statusTorneio}');
+        INSERT INTO torneios (nome, dtInicio, dtFim, descricao, qtdParticipantes, plataformas, formato, resultadoPor, tipoInscricao)
+        VALUES ('${nomeTVar}', '${dtInicio}', '${dtFim}', '${descricao}', '${participantes}', '${plataformasServer}', '${formatoServer}', '${resultadoServer}', '${tipoInscricaoSever}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

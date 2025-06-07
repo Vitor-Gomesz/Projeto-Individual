@@ -13,56 +13,81 @@
   text-align: left;
 }
 
-.info-torneio h2 {
+.infomaracoesT h2 {
+  display: flex;
+  justify-content: center;
   color: #FFCC00;
   margin-bottom: 10px;
   font-size: 28px;
 }
 
-.info-torneio p {
-  color: #ccc;
-  margin-bottom: 8px;
-}
 
-.jogadores-inscritos {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.jogadores-inscritos h3 {
-  color: #00b8f4;
-  margin-bottom: 10px;
-}
-
-.jogadores-inscritos ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.jogadores-inscritos li {
-  background-color: #2a2a2a;
+.infomaracoesT p {
   color: #fff;
-  padding: 10px;
   margin-bottom: 8px;
-  border-radius: 6px;
+  font-size: 18px;
 }
 
-.botao-container {
+.times-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.time {
+  width: 40%;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 12px;
+  color: #eee;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.time h3 {
+  color: #1604c0;
+  margin-bottom: 15px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.slot {
+  background-color: #2e2e2e;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  text-align: center;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
+  color: #ccc;
+  cursor: default;
+  user-select: none;
+}
+
+.botao_container {
   margin-top: 30px;
+  text-align: center;
 }
 
 .botao {
-  background-color: #00b8f4;
-  color: #fff;
-  padding: 12px 24px;
-  font-size: 18px;
+  background-color: #208ce4;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.4s;
+  color: #fff;
+  padding: 12px 30px;
+  font-size: 18px;
+  border-radius: 10px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
 }
 
 .botao:hover {
-  background-color: #007a8a;
+  background-color: #5c3ee0;
 }

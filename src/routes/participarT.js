@@ -9,7 +9,7 @@ router.get("/:ID_TORNEIO", function (req, res) {
 });
 
 // POST /torneios/:id/participar — inscreve jogador no torneio
-router.post("/participar", function (req, res) {
+router.post("/participar/:ID_TORNEIO", function (req, res) {
     participarTController.participarDoTorneio(req, res);
 });
 

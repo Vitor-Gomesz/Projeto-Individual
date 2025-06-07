@@ -13,7 +13,7 @@ function carregarDetalhesTorneio(req, res) {
                 .then(jogador => {
                     res.json({
                         torneio: torneio[0],
-                        jogador: jogador[0]
+                        jogador: jogador
                     });
                 })
                 .catch(erro => {

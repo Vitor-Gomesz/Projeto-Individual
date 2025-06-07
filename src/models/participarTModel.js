@@ -10,8 +10,10 @@ function buscarTorneioPorId(ID_TORNEIO) {
 
 function carregarDetalhesTorneio(ID_TORNEIO) {
     var instrucaoSql = `
-        select nome, descricao, dtInicio from torneios
-        WHERE idTorneios = ${ID_TORNEIO};
+    SELECT j.gamertag 
+        FROM jogadores_dos_torneios jt
+        JOIN jogadores j ON jt.fkJogadores = j.idJogadores
+        WHERE jt.fkTorneios = ${ID_TORNEIO};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

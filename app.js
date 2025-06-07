@@ -24,7 +24,7 @@ var empresasRouter = require("./src/routes/empresas");
 var torneioRouter = require("./src/routes/torneios");
 var criarTRouter = require("./src/routes/criarT")
 var r6TabRoutes = require('./src/routes/r6tab');
-var participarT = require("./src/routes/participarT")
+var participarTRouter = require("./src/routes/participarT")
 
 
 
@@ -43,7 +43,7 @@ app.use("/empresas", empresasRouter);
 app.use("/torneios", torneioRouter);
 app.use("/criarT", criarTRouter);
 app.use("/r6tab", r6TabRoutes);
-app.use("/participarT", participarT);
+app.use("/participarT", participarTRouter);
 
 
 app.listen(PORTA_APP, function () {

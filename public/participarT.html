@@ -30,8 +30,8 @@
         <h2 id="titulo_torneio"></h2>
         <p id="descricao_torneio"></p>
         <p>Data: <span id="data_torneio"></span></p>
-        <p id="descricao-torneio"></p>
-        <p id="descricao-torneio"></p>
+        <p id="plataformas"></p>
+        <p id="formato"></p>
       </div>
     </div>
     
@@ -77,17 +77,19 @@
             })
             .then(dados => {
               let dataFormatada = new Date(dados.torneio.dtInicio).toLocaleDateString()
-              document.getElementById("titulo-torneio").innerText = dados.torneio.nome;
-              document.getElementById("descricao-torneio").innerText = dados.torneio.descricao;
 
-              document.getElementById("data-torneio").innerText = dataFormatada
+              document.getElementById("titulo_torneio").innerText = dados.torneio.nome;
+              document.getElementById("descricao_torneio").innerText = dados.torneio.descricao;
+              document.getElementById("plataformas").innerText = dados.torneio.plataformas;
+              document.getElementById("formato").innerText = dados.torneio.formato;
+              document.getElementById("data_torneio").innerText = dataFormatada;
 
               listaJogadores.innerHTML = ""; 
-              if (dados.jogadores.lenght > 0) {
-              dados.jogadores.forEach(jogador => {
-                var lista = document.createElement("lista");
-                lista.innerText = jogador.gamertag;
-                listaJogadores.appendChild(lista);
+              if (dados.jogador.length > 0) {
+              dados.jogador.forEach(jogador => {
+                var li = document.createElement("li");
+                li.innerText = jogador.gamertag;
+                listaJogadores.appendChild(li);
               });
 
             }
@@ -101,14 +103,16 @@
 
         function participarDoTorneio() {
           var idJogador = sessionStorage.idJogador;
-          fetch(`/participarT/participar`, {
+          var ID_TORNEIO = sessionStorage.ID_TORNEIO;
+          
+          fetch(`/participarT/participar/${ID_TORNEIO}`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
               idTorneio: ID_TORNEIO,
-              idJogador: sessionStorage.idJogador
+              idJogador: idJogador
             }),
           })
           .then(res => {

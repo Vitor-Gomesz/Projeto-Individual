@@ -25,6 +25,7 @@ var torneioRouter = require("./src/routes/torneios");
 var criarTRouter = require("./src/routes/criarT")
 var r6TabRoutes = require('./src/routes/r6tab');
 var participarTRouter = require("./src/routes/participarT")
+var telaADMRouter = require("./src/routes/telaADM")
 
 
 
@@ -44,6 +45,7 @@ app.use("/torneios", torneioRouter);
 app.use("/criarT", criarTRouter);
 app.use("/r6tab", r6TabRoutes);
 app.use("/participarT", participarTRouter);
+app.use("/telaADM", telaADMRouter);
 
 
 app.listen(PORTA_APP, function () {

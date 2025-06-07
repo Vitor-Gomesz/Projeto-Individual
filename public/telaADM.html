@@ -14,8 +14,8 @@
       <h2>Atualizar Estatísticas do Jogador</h2>
 
       <section class="box_input">
-        <label for="idJogador">ID do Jogador</label>
-        <input type="number" id="idJogador" placeholder="Digite o ID do jogador" required>
+        <label for="input_nome">ID do Jogador</label>
+        <input type="text" id="input_nome" placeholder="Digite o Nome do Jogador" >
       </section>
 
       <section class="box_input">
@@ -35,12 +35,12 @@
         <label for="mortes">Mortes</label>
         <input type="number" id="mortes" placeholder="Qtd. Mortes">
       </section>
-
+<!-- 
       <section class="box_input">
         <h3>Pontuação</h3>
         <label for="pontuacao">Pontuação Total</label>
-        <input type="number" id="pontuacao" placeholder="Pontuação do jogador (opcional)">
-      </section>
+        <input type="number" id="pontuacao" placeholder="Pontuação do jogador">
+      </section> -->
 
 
       <button onclick="enviarEstatisticas()">Cadastrar / Atualizar</button>
@@ -49,3 +49,51 @@
     </section>
 </body>
 </html>
+<script>
+  function enviarEstatisticas() {
+    var gamertag = document.getElementById("input_nome").value;
+
+    var kills = Number(document.getElementById("kills").value);
+    var mortes = Number(document.getElementById("mortes").value);
+
+    var vitorias = Number(document.getElementById("vitorias").value);
+    var derrotas = Number(document.getElementById("derrotas").value);
+
+    var winrate = vitorias /  derrotas;  
+    var kd = kills / mortes;
+
+    var pontuacaoV = vitorias * 50;
+    var pontuacaoD = derrotas * 25;
+
+    var pontuacaoT = pontuacaoV - pontuacaoD;
+
+    fetch("/telaADM/enviarEstatisticas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nomeServer: gamertag,
+        winrateServer: winrate,
+        kdServer: kd,
+        pontuacaoTServer: pontuacaoT  
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+</script>

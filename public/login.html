@@ -104,9 +104,17 @@
                     sessionStorage.idJogador = json.id;
 
                      console.log("idJogador:",  sessionStorage.idJogador)
+
+                if (emailVar == 'lavexr6@gmail.com' && senhaVar == '24022006Vi@') {
                     setTimeout(function () {
-                        window.location = "torneios.html";
+                        window.location = "./telaADM.html";
+                    }, 1000);
+
+                } else {
+                    setTimeout(function () {
+                        window.location = "./torneios.html";
                     }, 1000); // apenas para exibir o loading
+                }
 
                 });
 

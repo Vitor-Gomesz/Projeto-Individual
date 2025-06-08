@@ -25,7 +25,7 @@
     </section>
 
     <section class="box_input">
-      <label for="input_senha_antiga">Senha atual</label>
+      <label for="input_senhaAntiga">Senha atual</label>
       <input type="password" id="input_senhaAntiga" placeholder="Digite sua senha antiga">
     </section>
 
@@ -46,3 +46,44 @@
 
 </body>
 </html>
+<script>
+    function trocarSenha(){
+
+        var idJogador = sessionStorage.idJogador
+
+        var gamertag = document.getElementById('input_nome').value;
+
+        var email = document.getElementById("input_email").value;
+        var senha = document.getElementById("input_senhaAntiga").value;
+
+        var senhaN = document.getElementById("input_novaSenha").value;
+        var emailN = document.getElementById("input_novoEmail").value;
+        
+        fetch("/trocarSenha", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: gamertag,
+                emailServer : email,
+                senhaServer : senha,
+                senhaNServer : senhaN,
+                emailNServer: emailN ,
+                idJogadorServer: idJogador
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.mensagem) {
+                alert("Alterações Realizadas!" + data.mensagem);
+            } else if (data.erro) {
+                alert("Erro" + data.erro);
+            }
+        })
+        .catch((erro) => {
+            console.error("Erro na requisição:", erro);
+            alert("Erro ao tentar trocar a senha.");
+        });
+    };
+</script>

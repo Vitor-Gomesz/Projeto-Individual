@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const r6Controller = require('../controllers/r6Controller');
+var express = require('express');
+var router = express.Router();
+var r6Controller = require('../controllers/r6Controller');
 
 router.get('/buscar/:plataforma/:nome', r6Controller.buscarPlayerPorNome);
 

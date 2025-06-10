@@ -16,8 +16,8 @@
       <h2>Atualizar Estatísticas do Jogador</h2>
 
       <section class="box_input">
-        <label for="input_nome">ID do Jogador</label>
-        <input type="text" id="input_nome" placeholder="Digite o Nome do Jogador" >
+        <label for="input_nome">Gamertag Do Jogador</label>
+        <input type="text" id="input_nome" placeholder="Digite a gamertag do Jogador" >
       </section>
 
       <section class="box_input">
@@ -86,14 +86,13 @@
 
         if (resposta.ok) {
           limparFormulario();
-          finalizarAguardar();
+
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
       });
 
     return false;

@@ -27,6 +27,7 @@ var r6TabRoutes = require('./src/routes/r6tab');
 var participarTRouter = require("./src/routes/participarT")
 var telaADMRouter = require("./src/routes/telaADM")
 var trocarSenhaRoute = require("./src/routes/trocarSenha");
+var kpisRouter = require("./src/routes/kpis");
 
 
 app.use(express.json());
@@ -47,6 +48,8 @@ app.use("/r6tab", r6TabRoutes);
 app.use("/participarT", participarTRouter);
 app.use("/telaADM", telaADMRouter);
 app.use("/trocarSenha", trocarSenhaRoute);
+app.use("/dashboard", kpisRouter);
+
 
 
 app.listen(PORTA_APP, function () {

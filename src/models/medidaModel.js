@@ -8,7 +8,7 @@ function buscarUltimasMedidas(idJogador, limite_linhas) {
         dt_registro as DATA_REGISTRO
                     FROM historico
                     WHERE fkJogadores = ${idJogador}
-                    ORDER BY fkJogadores DESC LIMIT ${limite_linhas}`;
+                    ORDER BY idHistorico DESC LIMIT ${limite_linhas}`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -17,11 +17,11 @@ function buscarUltimasMedidas(idJogador, limite_linhas) {
 function buscarMedidasEmTempoReal(idJogador) {
 
     var instrucaoSql = `SELECT 
-        win_rate as winRate, 
+        win_rate as WIN_RATE, 
         kd_ratio as KD,
-        dt_registro
+        dt_registro as DATA_REGISTRO
                         FROM historico WHERE fkJogadores = ${idJogador}
-                    ORDER BY fkJogadores DESC LIMIT 1`;
+                    ORDER BY idHistorico DESC LIMIT 1`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

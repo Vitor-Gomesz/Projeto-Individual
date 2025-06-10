@@ -78,7 +78,6 @@
           return;
         }
 
-        var listaJogadores = document.getElementById("lista-jogadores");
         var botaoParticipar = document.getElementById("botaoParticipar");
         var listaEquipeX = document.getElementById("listaEquipeX");
         var listaEquipeY = document.getElementById("listaEquipeY");
@@ -105,7 +104,8 @@
         }
 
         function carregarDetalhesTorneio() {
-          fetch(`/participarT/${ID_TORNEIO}`, { method: "GET" })
+          fetch(`/participarT/${ID_TORNEIO}`,
+           { method: "GET" })
             .then(res => {
               if (!res.ok) throw "Erro ao buscar detalhes do torneio";
               return res.json();
@@ -129,7 +129,7 @@
               mensagemErro.style.display = "none";
             })
             .catch(erro => {
-              mensagemErro.innerText = erro;
+              mensagemErro.innerText = "erro";
               mensagemErro.style.display = "block";
             });
         }
